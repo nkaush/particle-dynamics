@@ -6,7 +6,7 @@ using idealgas::GasContainer;
 
 TEST_CASE("Placeholder test") {
   GasContainer container;
-  container.AdvanceOneFrame();
+//  container.AdvanceOneFrame();
   REQUIRE(1 > 0);
 }
 

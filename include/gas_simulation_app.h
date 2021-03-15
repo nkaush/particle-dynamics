@@ -1,8 +1,8 @@
 #pragma once
 
-#include "cinder/app/App.h"
-#include "cinder/app/RendererGl.h"
-#include "cinder/gl/gl.h"
+#include "Cinder/app/App.h"
+#include "Cinder/app/RendererGl.h"
+#include "Cinder/gl/gl.h"
 #include "gas_container.h"
 
 namespace idealgas {

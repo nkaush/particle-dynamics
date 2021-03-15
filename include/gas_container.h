@@ -1,8 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-
-using glm::vec2;
+#include "gas_particle.h"
 
 namespace idealgas {
 
@@ -12,6 +11,11 @@ namespace idealgas {
  */
 class GasContainer {
  public:
+  static constexpr float kContainerUpperBound = 100;
+  static constexpr float kContainerLowerBound = 400;
+  static constexpr float kContainerLeftBound = 100;
+  static constexpr float kContainerRightBound = 600;
+
   /**
    * TODO: Add more parameters to this constructor, and add documentation.
    */
@@ -22,18 +26,21 @@ class GasContainer {
    */
   void Display() const;
 
-  /**
-   * Updates the positions and velocities of all particles (based on the rules
-   * described in the assignment documentation).
-   */
   void AdvanceOneFrame();
 
+  static glm::vec2 CalculateParticleVelocityAfterCollision(
+      const GasParticle& particle_one, const GasParticle& particle_two);
+
  private:
-  /**
-   * This variable is just for the purposes of demonstrating how to make a shape move
-   * across a screen. Please remove it once you start working on your code.
-   */
-  int dummy_variable_ = 0;
+  std::vector<GasParticle> all_particles_;
+
+  bool AreParticlesColliding(GasParticle& particle_one,
+                             GasParticle& particle_two) const;
+
+
+
+  static glm::vec2 CalculateParticleVelocityAfterWallCollision(
+      const GasParticle& particle);
 };
 
 }  // namespace idealgas
