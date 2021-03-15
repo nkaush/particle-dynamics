@@ -25,6 +25,19 @@ endif()
 # FetchContent added in CMake 3.11, downloads during the configure step
 include(FetchContent)
 
+FetchContent_Declare(json
+        GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
+        GIT_TAG v3.9.1)
+
+FetchContent_GetProperties(json)
+if(NOT json_POPULATED)
+    FetchContent_Populate(json)
+    add_library(json_lib INTERFACE)
+    add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
+target_link_libraries(json_lib INTERFACE nlohmann_json::nlohmann_json)
+
 # FetchContent_MakeAvailable was not added until CMake 3.14
 if(${CMAKE_VERSION} VERSION_LESS 3.14)
     include(cmake/add_FetchContent_MakeAvailable.cmake)
@@ -51,7 +64,8 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/gas_simulation_app.cc
-                            src/gas_particle.cc)
+                            src/gas_particle.cc
+                            src/simulation_engine.cc)
 
 list(APPEND TEST_FILES tests/rename_this_test_file.cc)
 list(APPEND TEST_FILES tests/test_gas_particle.cc)
@@ -62,6 +76,7 @@ ci_make_app(
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
         INCLUDES        include
+        LIBRARIES       json_lib
 )
 
 ci_make_app(

@@ -21,6 +21,12 @@ class GasParticle {
 
   float GetRadius() const;
 
+  int GetRedIntensity() const;
+
+  int GetGreenIntensity() const;
+
+  int GetBlueIntensity() const;
+
   void DrawParticle() const;
 
   void SetVelocity(const glm::vec2& new_velocity);

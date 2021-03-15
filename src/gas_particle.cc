@@ -37,6 +37,18 @@ float GasParticle::GetRadius() const {
   return radius_;
 }
 
+int GasParticle::GetRedIntensity() const {
+  return red_color_intensity_;
+}
+
+int GasParticle::GetGreenIntensity() const {
+    return green_color_intensity_;
+}
+
+int GasParticle::GetBlueIntensity() const {
+  return blue_color_intensity_;
+}
+
 void GasParticle::DrawParticle() const {
   ci::gl::color(ci::Color(red_color_intensity_,
                           green_color_intensity_,

@@ -13,6 +13,9 @@ GasContainer::GasContainer() {
   all_particles_.push_back(f);
 }
 
+GasContainer::GasContainer(const vector<GasParticle>& particles) :
+      all_particles_(particles) {}
+
 void GasContainer::Display() const {
   // This function has a lot of magic numbers; be sure to design your code in a way that avoids this.
   ci::gl::color(ci::Color("white"));
@@ -21,13 +24,26 @@ void GasContainer::Display() const {
   ci::gl::drawStrokedRect(ci::Rectf(top_left_point, bottom_right_point));
 
   for (const GasParticle& particle : all_particles_) {
-    ci::gl::color(ci::Color("orange"));
-    ci::gl::drawSolidCircle(particle.GetPosition(), 10);
+    ci::gl::color(ci::Color(particle.GetRedIntensity(),
+                            particle.GetGreenIntensity(),
+                            particle.GetBlueIntensity()));
+    ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetRadius());
   }
 }
 
+vector<GasParticle> GasContainer::GetAllParticles() const {
+  return all_particles_;
+}
+
 void GasContainer::AdvanceOneFrame() {
-  // TODO: MOVE LOGIC to new simulation logic class
+  HandleParticleInteractions();
+
+  for (GasParticle& particle : all_particles_) {
+    particle.UpdatePosition();
+  }
+}
+
+void GasContainer::HandleParticleInteractions() {
   size_t num_particles = all_particles_.size();
 
   for (size_t i = 0; i < num_particles; i++) {
@@ -58,10 +74,6 @@ void GasContainer::AdvanceOneFrame() {
       }
     }
   }
-
-  for (GasParticle& particle : all_particles_) {
-    particle.UpdatePosition();
-  }
 }
 
 bool GasContainer::AreParticlesColliding(GasParticle& particle_one,
@@ -80,28 +92,52 @@ bool GasContainer::AreParticlesColliding(GasParticle& particle_one,
 
 vec2 GasContainer::CalculateParticleVelocityAfterWallCollision(
     const GasParticle& particle) {
-  vec2 initial_velocity = particle.GetVelocity();
-  vec2 new_velocity = vec2(initial_velocity);
-  vec2 position = particle.GetPosition();
-  float radius = particle.GetRadius();
+  vec2 initial_velo = particle.GetVelocity();
+  vec2 new_velocity = vec2(initial_velo);
 
-  // If particle collides with vertical walls (x-axis = index 0)
-  bool is_colliding_at_left_wall = position[0] - radius <= kContainerLeftBound;
-  bool is_colliding_at_right_wall = position[0] + radius >= kContainerRightBound;
+  size_t x_axis_idx = 0;
+  size_t y_axis_idx = 1;
 
-  if (is_colliding_at_left_wall || is_colliding_at_right_wall) {
-    new_velocity[0] = initial_velocity[0] * -1;
+  bool is_collision_at_vertical_wall =
+      IsParticleCollidingWithWalls(particle, x_axis_idx, kContainerLeftBound,
+                                   kContainerRightBound);
+
+  if (is_collision_at_vertical_wall) {
+    // invert the x-velocity by multiplying that component by -1
+    new_velocity[x_axis_idx] = initial_velo[x_axis_idx] * -1;
   }
 
-  // If particle collides with horizontal walls (y-axis = index 1)
-  bool is_colliding_at_upper_wall = position[1] - radius <= kContainerUpperBound;
-  bool is_colliding_at_lower_wall = position[1] + radius >= kContainerLowerBound;
+  bool is_collision_at_horizontal_wall =
+      IsParticleCollidingWithWalls(particle, y_axis_idx, kContainerUpperBound,
+                                   kContainerLowerBound);
 
-  if (is_colliding_at_upper_wall || is_colliding_at_lower_wall) {
-    new_velocity[1] = initial_velocity[1] * -1;
+  if (is_collision_at_horizontal_wall) {
+    // invert the y-velocity by multiplying that component by -1
+    new_velocity[y_axis_idx] = initial_velo[y_axis_idx] * -1;
   }
 
   return new_velocity;
+}
+
+bool GasContainer::IsParticleCollidingWithWalls(const GasParticle& particle,
+                                                size_t axis_idx,
+                                                float min_wall_bound,
+                                                float max_wall_bound) {
+  // Check if particle is at or past the specified bounds
+  float position_component = particle.GetPosition()[axis_idx];
+  float radius = particle.GetRadius();
+  bool is_colliding_at_lower_bound_wall = position_component - radius
+                                          <= min_wall_bound;
+  bool is_colliding_at_upper_bound_wall = position_component + radius
+                                          >= max_wall_bound;
+
+  float velocity_component = particle.GetVelocity()[axis_idx];
+  // Ensure the particle is moving away from the walls to avoid getting stuck
+  is_colliding_at_lower_bound_wall &= velocity_component < 0;
+  is_colliding_at_upper_bound_wall &= velocity_component > 0;
+
+  // Only change the velocity if the particle is approaching a wall
+  return is_colliding_at_lower_bound_wall || is_colliding_at_upper_bound_wall;
 }
 
 vec2 GasContainer::CalculateParticleVelocityAfterCollision(

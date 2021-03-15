@@ -21,6 +21,8 @@ class GasContainer {
    */
   GasContainer();
 
+  GasContainer(const std::vector<GasParticle>& particles);
+
   /**
    * Displays the container walls and the current positions of the particles.
    */
@@ -28,19 +30,26 @@ class GasContainer {
 
   void AdvanceOneFrame();
 
+  std::vector<GasParticle> GetAllParticles() const;
+
   static glm::vec2 CalculateParticleVelocityAfterCollision(
       const GasParticle& particle_one, const GasParticle& particle_two);
 
  private:
   std::vector<GasParticle> all_particles_;
 
+  void HandleParticleInteractions();
+
   bool AreParticlesColliding(GasParticle& particle_one,
                              GasParticle& particle_two) const;
 
-
-
   static glm::vec2 CalculateParticleVelocityAfterWallCollision(
       const GasParticle& particle);
+
+  static bool IsParticleCollidingWithWalls(const GasParticle& particle,
+                                           size_t axis_idx,
+                                           float min_wall_bound,
+                                           float max_wall_bound);
 };
 
 }  // namespace idealgas
