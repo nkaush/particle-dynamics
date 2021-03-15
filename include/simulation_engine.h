@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 
 #include "gas_container.h"
+#include "cinder/Rand.h"
 
 #ifndef IDEAL_GAS_SIMULATION_ENGINE_H
 #define IDEAL_GAS_SIMULATION_ENGINE_H
@@ -25,7 +26,7 @@ class SimulationEngine {
 
   GasContainer LoadContainerFromJson() const;
 
-  GasContainer SaveContainerToJson() const;
+  void SaveContainerToJson() const;
 
  private:
   static const std::string kBaseDataFilePath;

@@ -1,0 +1,23 @@
+{
+  "particle_types": {
+    "oxygen": {
+      "red": 200,
+      "green": 0,
+      "blue": 200,
+      "radius": 7
+    },
+    "hydrogen": {
+      "red": 255,
+      "green": 0,
+      "blue": 0,
+      "radius": 4
+    }
+  },
+  "particle_states": [
+    {
+      "type": "hydrogen",
+      "velocity": [-1, -1],
+      "position": [104, 104]
+    }
+  ]
+}

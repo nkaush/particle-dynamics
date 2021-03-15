@@ -3,23 +3,19 @@
 //
 #include <gas_particle.h>
 
+#include <nlohmann/json.hpp>
+
 namespace idealgas {
 
 using glm::vec2;
-using std::vector;
-using glm::dot;
+using std::string;
+using nlohmann::json;
 
 GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
-                         float radius) :
-    position_(initial_pos), velocity_(initial_velo), radius_(radius),
-    red_color_intensity_(255), green_color_intensity_(255),
-    blue_color_intensity_(255) {}
-
-GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
-                         float radius_to_set, int red, int green, int blue) :
+                         float radius_to_set, int red, int green, int blue, const string& name) :
       position_(initial_pos), velocity_(initial_velo), radius_(radius_to_set),
       red_color_intensity_(red), green_color_intensity_(green),
-      blue_color_intensity_(blue) {}
+      blue_color_intensity_(blue), particle_type_name_(name) {}
 
 void GasParticle::UpdatePosition() {
   position_ += velocity_;
@@ -48,6 +44,10 @@ int GasParticle::GetGreenIntensity() const {
 int GasParticle::GetBlueIntensity() const {
   return blue_color_intensity_;
 }
+
+string GasParticle::GetTypeName() const {
+    return particle_type_name_;
+};
 
 void GasParticle::DrawParticle() const {
   ci::gl::color(ci::Color(red_color_intensity_,

@@ -11,7 +11,8 @@ class GasParticle {
               float radius);
 
   GasParticle(const glm::vec2& initial_pos, const glm::vec2& initial_velo,
-              float radius, int red, int green, int blue);
+              float radius, int red, int green, int blue,
+              const std::string& name);
 
   void UpdatePosition();
 
@@ -27,6 +28,8 @@ class GasParticle {
 
   int GetBlueIntensity() const;
 
+  std::string GetTypeName() const;
+
   void DrawParticle() const;
 
   void SetVelocity(const glm::vec2& new_velocity);
@@ -39,6 +42,8 @@ class GasParticle {
   int red_color_intensity_;
   int green_color_intensity_;
   int blue_color_intensity_;
+
+  std::string particle_type_name_;
 };
 
 }  // namespace idealgas

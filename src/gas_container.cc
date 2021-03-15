@@ -6,11 +6,7 @@ using glm::vec2;
 using std::vector;
 
 GasContainer::GasContainer() {
-  GasParticle g = GasParticle(vec2(300, 200), vec2(-1, 0), 10, 200, 100, 200);
-  GasParticle f = GasParticle(vec2(500, 200), vec2(1, 0), 10, 200, 100, 200);
 
-  all_particles_.push_back(g);
-  all_particles_.push_back(f);
 }
 
 GasContainer::GasContainer(const vector<GasParticle>& particles) :
@@ -87,7 +83,25 @@ bool GasContainer::AreParticlesColliding(GasParticle& particle_one,
       glm::distance(particle_one.GetPosition(), particle_two.GetPosition());
   float radius_sum = particle_two.GetRadius() + particle_one.GetRadius();
 
-  return glm::dot(velocity_difference, position_difference) < 0 && center_distance <= radius_sum;
+  bool are_moving_towards_each_other =
+      glm::dot(velocity_difference, position_difference) < 0;
+
+  return are_moving_towards_each_other && center_distance <= radius_sum;
+}
+
+vec2 GasContainer::CalculateParticleVelocityAfterCollision(
+    const GasParticle& particle_one, const GasParticle& particle_two) {
+  vec2 velo_diff = particle_one.GetVelocity() - particle_two.GetVelocity();
+  vec2 pos_diff = particle_one.GetPosition() - particle_two.GetPosition();
+
+  float velo_pos_dot_product = dot(velo_diff, pos_diff);
+  float pos_diff_length = glm::length(pos_diff);
+
+  float squared_pos_diff_length = pos_diff_length * pos_diff_length;
+  float velo_change_scalar = velo_pos_dot_product / squared_pos_diff_length;
+  vec2 velocity_change = velo_change_scalar * pos_diff;
+
+  return particle_one.GetVelocity() - velocity_change;
 }
 
 vec2 GasContainer::CalculateParticleVelocityAfterWallCollision(
@@ -138,20 +152,6 @@ bool GasContainer::IsParticleCollidingWithWalls(const GasParticle& particle,
 
   // Only change the velocity if the particle is approaching a wall
   return is_colliding_at_lower_bound_wall || is_colliding_at_upper_bound_wall;
-}
-
-vec2 GasContainer::CalculateParticleVelocityAfterCollision(
-    const GasParticle& particle_one, const GasParticle& particle_two) {
-  vec2 velo_diff = particle_one.GetVelocity() - particle_two.GetVelocity();
-  vec2 pos_diff = particle_one.GetPosition() - particle_two.GetPosition();
-
-  float velo_pos_dot_product = dot(velo_diff, pos_diff);
-  float pos_diff_length = glm::length(pos_diff);
-  float squared_pos_diff_length = pos_diff_length * pos_diff_length;
-  float velo_change_scalar = velo_pos_dot_product / squared_pos_diff_length;
-  vec2 velocity_change = velo_change_scalar * pos_diff;
-
-  return particle_one.GetVelocity() - velocity_change;
 }
 
 }  // namespace idealgas
