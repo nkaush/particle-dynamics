@@ -68,8 +68,10 @@ GasContainer SimulationEngine::LoadContainerFromJson() const {
     // Convert a json array to a vec2 for position and velocity
     json position_array = particle_state[kJsonSchemaPositionKey];
     json velocity_array = particle_state[kJsonSchemaVelocityKey];
-    vec2 init_position = vec2(position_array[0], position_array[1]);
-    vec2 init_velocity = vec2(velocity_array[0], velocity_array[1]);
+    vec2 init_position = vec2(position_array[GasContainer::kXAxis],
+                              position_array[GasContainer::kYAxis]);
+    vec2 init_velocity = vec2(velocity_array[GasContainer::kXAxis],
+                              velocity_array[GasContainer::kYAxis]);
 
     // Get the particle definition this object is referring to
     string particle_type_name = particle_state[kJsonSchemaTypeKey];
@@ -107,8 +109,10 @@ GasContainer SimulationEngine::GenerateRandomContainerFromJson() const {
     json velocity_range = particle_specs[kJsonSchemaVelocityRangeKey];
 
     for (size_t idx = 0; idx < specified_count; idx++) {
-      float x_velo = random.posNegFloat(velocity_range[0], velocity_range[1]);
-      float y_velo = random.posNegFloat(velocity_range[0], velocity_range[1]);
+      float x_velo = random.posNegFloat(velocity_range[GasContainer::kXAxis],
+                                        velocity_range[GasContainer::kYAxis]);
+      float y_velo = random.posNegFloat(velocity_range[GasContainer::kXAxis],
+                                        velocity_range[GasContainer::kYAxis]);
       vec2 velocity = vec2(x_velo, y_velo);
 
       float x_position = random.nextFloat(GasContainer::kContainerLeftBound,
@@ -142,13 +146,13 @@ void SimulationEngine::SaveContainerToJson() const {
     serialized_particle[kJsonSchemaTypeKey] = particle.GetTypeName();
 
     json position_array;
-    position_array.push_back(particle.GetPosition()[0]);
-    position_array.push_back(particle.GetPosition()[1]);
+    position_array.push_back(particle.GetPosition()[GasContainer::kXAxis]);
+    position_array.push_back(particle.GetPosition()[GasContainer::kYAxis]);
     serialized_particle[kJsonSchemaPositionKey] = position_array;
 
     json velocity_array;
-    velocity_array.push_back(particle.GetVelocity()[0]);
-    velocity_array.push_back(particle.GetVelocity()[1]);
+    velocity_array.push_back(particle.GetVelocity()[GasContainer::kXAxis]);
+    velocity_array.push_back(particle.GetVelocity()[GasContainer::kYAxis]);
     serialized_particle[kJsonSchemaVelocityKey] = velocity_array;
 
     particle_array.push_back(serialized_particle);

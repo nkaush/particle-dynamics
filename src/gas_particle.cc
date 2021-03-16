@@ -17,7 +17,8 @@ GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
       blue_color_intensity_(specs.blue), particle_type_name_(specs.name) {}
 
 GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
-                         float radius_to_set, int red, int green, int blue, const string& name) :
+                         float radius_to_set, float red, float green, float blue,
+                         const string& name) :
       position_(initial_pos), velocity_(initial_velo), radius_(radius_to_set),
       red_color_intensity_(red), green_color_intensity_(green),
       blue_color_intensity_(blue), particle_type_name_(name) {}
@@ -38,21 +39,9 @@ float GasParticle::GetRadius() const {
   return radius_;
 }
 
-int GasParticle::GetRedIntensity() const {
-  return red_color_intensity_;
-}
-
-int GasParticle::GetGreenIntensity() const {
-    return green_color_intensity_;
-}
-
-int GasParticle::GetBlueIntensity() const {
-  return blue_color_intensity_;
-}
-
 string GasParticle::GetTypeName() const {
     return particle_type_name_;
-};
+}
 
 void GasParticle::DrawParticle() const {
   ci::gl::color(ci::Color(red_color_intensity_,

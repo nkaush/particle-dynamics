@@ -14,23 +14,61 @@
 
 namespace idealgas {
 
+/**
+ * This class manages the simulation by starting it, saving it, and rendering it.
+ */
 class SimulationEngine {
  public:
+  /**
+   * Creates a GasContainer for this simulation from either the saved
+   * simulation json file or from the json file indicating the parameters
+   * for a randomly generated simulation.
+   * @param load_from_saved_file - indicates whether to load simulation from
+   * a saved json file (true) or randomly generate simulation (false)
+   */
   SimulationEngine(bool load_from_saved_file);
 
+  /**
+   * This is a helper function for the constructor that reroutes to the
+   * necessary simulation generation function based on whether to load
+   * a saved simulation or random simulation.
+   * @param load_from_saved_file - indicates whether to load simulation from
+   * a saved json file (true) or randomly generate simulation (false)
+   * @return a GasContainer generated as specified
+   */
   GasContainer ContainerInitializer(bool load_from_saved_file) const;
 
-  void AdvanceToNextFrame();
-
-  void Render();
-
+  /**
+   * Generates a random simulation using the parameters specified in the
+   * random simulation generator json file.
+   * @return a randomly generated GasContainer
+   */
   GasContainer GenerateRandomContainerFromJson() const;
 
+  /**
+   * Generates a simulation using the saved particles states in the saved
+   * simulation generator json file.
+   * @return a GasContainer loaded from the saved json file
+   */
   GasContainer LoadContainerFromJson() const;
 
+  /**
+   * Saves the current state of the simulation in a json file.
+   */
   void SaveContainerToJson() const;
 
+  /**
+   * Steps the simulation 1 unit in time. Updates the GasContainer accordingly.
+   */
+  void AdvanceToNextFrame();
+
+  /**
+   * Display the current state of the simulation.
+   */
+  void Render();
+
  private:
+  // Store the file paths to read/save json from/to
   static const std::string kBaseDataFilePath;
   static const std::string kJsonStateFilePath;
   static const std::string kJsonRandomSimulationFilePath;

@@ -13,17 +13,27 @@ namespace idealgas {
  */
 class IdealGasApp : public ci::app::App {
  public:
+  /**
+   * Creates a simulation.
+   */
   IdealGasApp();
 
+  /**
+   * Draws the current state of the simulation.
+   */
   void draw() override;
+
+  /**
+   * Advances the simulation 1 unit of time forward.
+   */
   void update() override;
 
-  // TODO: Delete this comment. Feel free to play around with these variables
-  // provided that you can see the entire UI on your screen.
+  // Define the size of the window to display the simulation
   const int kWindowSize = 700;
   const int kMargin = 100;
 
  private:
+  // Stores the logic that runs the simulation
   SimulationEngine engine_;
 };
 
