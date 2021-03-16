@@ -18,6 +18,8 @@ class SimulationEngine {
  public:
   SimulationEngine(bool load_from_saved_file);
 
+  GasContainer ContainerInitializer(bool load_from_saved_file) const;
+
   void AdvanceToNextFrame();
 
   void Render();

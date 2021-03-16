@@ -37,20 +37,16 @@ const string SimulationEngine::kJsonSchemaRadiusKey = "radius";
 const string SimulationEngine::kJsonSchemaParticleCountKey = "particle_count";
 const string SimulationEngine::kJsonSchemaVelocityRangeKey = "velocity_range";
 
-SimulationEngine::SimulationEngine(bool load_from_saved_file) {
+SimulationEngine::SimulationEngine(bool load_from_saved_file) :
+      container_(ContainerInitializer(load_from_saved_file)) {}
+
+GasContainer SimulationEngine::ContainerInitializer(
+    bool load_from_saved_file) const {
   if (load_from_saved_file) {
-    container_ = LoadContainerFromJson();
+    return LoadContainerFromJson();
   } else {
-    container_ = GenerateRandomContainerFromJson();
+    return GenerateRandomContainerFromJson();
   }
-}
-
-void SimulationEngine::AdvanceToNextFrame() {
-  container_.AdvanceOneFrame();
-}
-
-void SimulationEngine::Render() {
-  container_.Display();
 }
 
 GasContainer SimulationEngine::LoadContainerFromJson() const {
@@ -161,6 +157,14 @@ void SimulationEngine::SaveContainerToJson() const {
   output[kJsonSchemaParticleStatesKey] = particle_array;
   std::ofstream output_file("pretty.json");
   output_file << std::setw(4) << output << std::endl;
+}
+
+void SimulationEngine::AdvanceToNextFrame() {
+  container_.AdvanceOneFrame();
+}
+
+void SimulationEngine::Render() {
+  container_.Display();
 }
 
 }  // namespace idealgas

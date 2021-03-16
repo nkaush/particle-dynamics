@@ -67,7 +67,6 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/gas_particle.cc
                             src/simulation_engine.cc)
 
-list(APPEND TEST_FILES tests/rename_this_test_file.cc)
 list(APPEND TEST_FILES tests/test_gas_particle.cc)
 list(APPEND TEST_FILES tests/test_gas_container.cc)
 
@@ -85,6 +84,7 @@ ci_make_app(
         SOURCES         tests/test_main.cc ${SOURCE_FILES} ${TEST_FILES}
         INCLUDES        include
         LIBRARIES       catch2
+        LIBRARIES       json_lib
 )
 
 if(MSVC)

@@ -19,7 +19,6 @@ class GasContainer {
   /**
    * TODO: Add more parameters to this constructor, and add documentation.
    */
-  GasContainer();
 
   GasContainer(const std::vector<GasParticle>& particles);
 
@@ -35,13 +34,13 @@ class GasContainer {
   static glm::vec2 CalculateParticleVelocityAfterCollision(
       const GasParticle& particle_one, const GasParticle& particle_two);
 
+  static bool AreParticlesColliding(const GasParticle& particle_one,
+                                    const GasParticle& particle_two);
+
  private:
   std::vector<GasParticle> all_particles_;
 
   void HandleParticleInteractions();
-
-  bool AreParticlesColliding(GasParticle& particle_one,
-                             GasParticle& particle_two) const;
 
   static glm::vec2 CalculateParticleVelocityAfterWallCollision(
       const GasParticle& particle);

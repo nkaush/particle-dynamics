@@ -5,10 +5,6 @@ namespace idealgas {
 using glm::vec2;
 using std::vector;
 
-GasContainer::GasContainer() {
-
-}
-
 GasContainer::GasContainer(const vector<GasParticle>& particles) :
       all_particles_(particles) {}
 
@@ -72,8 +68,8 @@ void GasContainer::HandleParticleInteractions() {
   }
 }
 
-bool GasContainer::AreParticlesColliding(GasParticle& particle_one,
-                                             GasParticle& particle_two) const {
+bool GasContainer::AreParticlesColliding(const GasParticle& particle_one,
+                                         const GasParticle& particle_two)  {
   vec2 velocity_difference = particle_one.GetVelocity()
                               - particle_two.GetVelocity();
   vec2 position_difference = particle_one.GetPosition()

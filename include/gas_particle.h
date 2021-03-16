@@ -5,10 +5,18 @@
 
 namespace idealgas {
 
+struct ParticleSpecs {
+  float radius;
+  int red;
+  int green;
+  int blue;
+  std::string name;
+};
+
 class GasParticle {
  public:
   GasParticle(const glm::vec2& initial_pos, const glm::vec2& initial_velo,
-              float radius);
+              const ParticleSpecs& specs);
 
   GasParticle(const glm::vec2& initial_pos, const glm::vec2& initial_velo,
               float radius, int red, int green, int blue,
