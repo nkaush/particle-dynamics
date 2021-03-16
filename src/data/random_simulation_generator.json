@@ -1,5 +1,11 @@
 {
   "particle_types": {
+    "carbon": {
+      "red": 0.2,
+      "green": 0.79,
+      "blue": 0.5,
+      "radius": 7
+    },
     "oxygen": {
       "red": 0.76,
       "green": 0.16,
@@ -16,13 +22,18 @@
   "particle_states": [
     {
       "type": "oxygen",
-      "particle_count": 100,
-      "velocity_range": [0, 2]
+      "particle_count": 25,
+      "max_velocity": 2
     },
     {
       "type": "hydrogen",
-      "particle_count": 0,
-      "velocity_range": [0, 2]
+      "particle_count": 50,
+      "max_velocity": 2
+    },
+    {
+      "type": "carbon",
+      "particle_count": 25,
+      "max_velocity": 2
     }
   ]
 }

@@ -28,9 +28,13 @@ class IdealGasApp : public ci::app::App {
    */
   void update() override;
 
+  void keyDown(cinder::app::KeyEvent event) override;
+
   // Define the size of the window to display the simulation
   const int kWindowSize = 700;
   const int kMargin = 100;
+
+  static constexpr char kSaveToJsonKey = 's';
 
  private:
   // Stores the logic that runs the simulation

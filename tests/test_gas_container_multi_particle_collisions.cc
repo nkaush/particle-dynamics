@@ -3,7 +3,6 @@
 //
 
 #include <catch2/catch.hpp>
-
 #include <gas_container.h>
 
 using idealgas::GasParticle;
@@ -33,21 +32,6 @@ bool AreVectorsAccurate(const vec2& vector_one, const vec2& vector_two) {
       all(lessThan(vector_two, kExpectedAccuracy));
 
   return is_vector_one_accurate && is_vector_two_accurate;
-}
-
-TEST_CASE("Testing Wall Collisions") {
-  SECTION("Increment position with positive x-axis velocity") {
-
-//    FindWallsCollidingWithParticle
-//    vec2 position = vec2(GasContainer::kContainerRightWall.wall_coordinate - 10,
-//                           GasContainer::kContainerUpperWall.wall_coordinate + 100);
-//    GasParticle particle = GasParticle(position, vec2(0.1, 0), 10);
-//
-//    GasContainer container = GasContainer();
-//    REQUIRE(container.CalculateParticleVelocityAfterWallCollision(particle) == 1);
-  }
-
-// TODO: Add tests for diagonal movements
 }
 
 TEST_CASE("Testing Particle on Particle Collisions") {
@@ -121,7 +105,7 @@ TEST_CASE("Testing Particle on Particle Collisions") {
     REQUIRE(AreVectorsAccurate(velocity_one_accuracy, velocity_two_accuracy));
   }
 
-  SECTION("Particles are overlap but moving away on different axis") {
+  SECTION("Particles are overlapping but moving away on different axis") {
     GasParticle particle_one = CreateParticle(200, 200, 1, 0, specs);
     GasParticle particle_two = CreateParticle(200, 201, -1, 0, specs);
 
@@ -138,7 +122,7 @@ TEST_CASE("Testing Particle on Particle Collisions") {
     REQUIRE(AreVectorsAccurate(velocity_one_accuracy, velocity_two_accuracy));
   }
 
-  SECTION("Particles are overlap but moving same direction") {
+  SECTION("Particles are overlapping but moving same direction") {
     GasParticle particle_one = CreateParticle(200, 200, 1, 0, specs);
     GasParticle particle_two = CreateParticle(200, 201, 1, 0, specs);
 

@@ -19,6 +19,10 @@ namespace idealgas {
  */
 class SimulationEngine {
  public:
+  // Store the file paths to read/save json from/to
+  static const std::string kJsonStateFilePath;
+  static const std::string kJsonRandomSimulationFilePath;
+
   /**
    * Creates a GasContainer for this simulation from either the saved
    * simulation json file or from the json file indicating the parameters
@@ -41,21 +45,24 @@ class SimulationEngine {
   /**
    * Generates a random simulation using the parameters specified in the
    * random simulation generator json file.
+   * @param json_file_path - a string indicating the path load load json from
    * @return a randomly generated GasContainer
    */
-  GasContainer GenerateRandomContainerFromJson() const;
+  GasContainer GenerateRandomContainerFromJson(
+      const std::string& json_file_path) const;
 
   /**
    * Generates a simulation using the saved particles states in the saved
    * simulation generator json file.
+   * @param json_file_path - a string indicating the path load load json from
    * @return a GasContainer loaded from the saved json file
    */
-  GasContainer LoadContainerFromJson() const;
+  GasContainer LoadContainerFromJson(const std::string& json_file_path) const;
 
   /**
    * Saves the current state of the simulation in a json file.
    */
-  void SaveContainerToJson() const;
+  void SaveContainerToJson(const std::string& save_file_path) const;
 
   /**
    * Steps the simulation 1 unit in time. Updates the GasContainer accordingly.
@@ -68,10 +75,8 @@ class SimulationEngine {
   void Render();
 
  private:
-  // Store the file paths to read/save json from/to
-  static const std::string kBaseDataFilePath;
-  static const std::string kJsonStateFilePath;
-  static const std::string kJsonRandomSimulationFilePath;
+  // The full directory path to this project
+  static const std::string kBaseFilePath;
 
   // These keys access the subsections of the json: motion and visuals
   static const std::string kJsonSchemaParticleStatesKey;
@@ -90,7 +95,7 @@ class SimulationEngine {
 
   // These fields are used as constraints for generating GasContainers randomly
   static const std::string kJsonSchemaParticleCountKey;
-  static const std::string kJsonSchemaVelocityRangeKey;
+  static const std::string kJsonSchemaMaxVelocityKey;
 
   GasContainer container_;
 };

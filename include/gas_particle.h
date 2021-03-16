@@ -65,10 +65,15 @@ class GasParticle {
 
   float GetRadius() const;
 
+  float GetRedIntensity() const;
+
+  float GetGreenIntensity() const;
+
+  float GetBlueIntensity() const;
+
   std::string GetTypeName() const;
 
   void SetVelocity(const glm::vec2& new_velocity);
-
 
  private:
   // The particle's current location

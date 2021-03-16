@@ -2,6 +2,8 @@
 
 namespace idealgas {
 
+using cinder::app::KeyEvent;
+
 IdealGasApp::IdealGasApp() : engine_(SimulationEngine(false)) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
@@ -15,6 +17,12 @@ void IdealGasApp::draw() {
 
 void IdealGasApp::update() {
   engine_.AdvanceToNextFrame();
+}
+void IdealGasApp::keyDown(KeyEvent event) {
+  if (event.getChar() == kSaveToJsonKey) {
+    engine_.SaveContainerToJson(SimulationEngine::kJsonStateFilePath);
+    console() << "Simulation Saved!" << std::endl;
+  }
 }
 
 }  // namespace idealgas

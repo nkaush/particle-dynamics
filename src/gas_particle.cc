@@ -39,6 +39,18 @@ float GasParticle::GetRadius() const {
   return radius_;
 }
 
+float GasParticle::GetRedIntensity() const {
+  return red_color_intensity_;
+}
+
+float GasParticle::GetGreenIntensity() const {
+  return green_color_intensity_;
+}
+
+float GasParticle::GetBlueIntensity() const {
+  return blue_color_intensity_;
+}
+
 string GasParticle::GetTypeName() const {
     return particle_type_name_;
 }
