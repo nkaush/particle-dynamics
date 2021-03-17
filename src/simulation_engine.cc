@@ -20,6 +20,7 @@ const string SimulationEngine::kJsonRandomSimulationFilePath = kBaseFilePath
 
 const string SimulationEngine::kJsonSchemaParticleStatesKey = "particle_states";
 const string SimulationEngine::kJsonSchemaParticleTypesKey = "particle_types";
+const string SimulationEngine::kJsonSchemaParticleCountsKey = "particle_counts";
 
 // These keys access info about a particle's motion
 const string SimulationEngine::kJsonSchemaVelocityKey = "velocity";
@@ -33,7 +34,7 @@ const string SimulationEngine::kJsonSchemaBlueKey = "blue";
 const string SimulationEngine::kJsonSchemaRadiusKey = "radius";
 
 // These fields are used as constraints for generating GasContainers randomly
-const string SimulationEngine::kJsonSchemaParticleCountKey = "particle_count";
+const string SimulationEngine::kJsonSchemaCountKey = "count";
 const string SimulationEngine::kJsonSchemaMaxVelocityKey = "max_velocity";
 
 SimulationEngine::SimulationEngine(bool load_from_saved_file) :
@@ -111,11 +112,12 @@ GasContainer SimulationEngine::GenerateRandomContainerFromJson(
   ci::Rand random = ci::Rand();
 
   // Go through each particle type requested to create and create all of them
-  for (json particle_specification : json_data[kJsonSchemaParticleStatesKey]) {
+  for (json particle_specification : json_data[kJsonSchemaParticleCountsKey]) {
+    // Load the color and radius json for the newest particle to create
     string particle_type_key = particle_specification[kJsonSchemaTypeKey];
     json type_details = particle_types[particle_type_key];
 
-    size_t specified_count = particle_specification[kJsonSchemaParticleCountKey];
+    size_t specified_count = particle_specification[kJsonSchemaCountKey];
     float max_velocity = particle_specification[kJsonSchemaMaxVelocityKey];
 
     for (size_t idx = 0; idx < specified_count; idx++) {
@@ -150,21 +152,20 @@ GasParticle SimulationEngine::GenerateRandomParticle(
   return gas_particle;
 }
 
-void SimulationEngine::ValidateRandomGenerationJson(const json& to_validate)
-    const {
+void SimulationEngine::ValidateRandomGenerationJson(const json& to_validate) {
   // Check if the 2 json sub-objects containing all important info exist
   try {
-    to_validate.at(kJsonSchemaParticleStatesKey);
+    to_validate.at(kJsonSchemaParticleCountsKey);
     to_validate.at(kJsonSchemaParticleTypesKey);
   } catch (json::exception& e) {
     throw std::invalid_argument("The provided json is invalid");
   }
 
   // Check the particle counts schema
-  for (const json& particle_count : to_validate[kJsonSchemaParticleStatesKey]) {
+  for (const json& particle_count : to_validate[kJsonSchemaParticleCountsKey]) {
     try {
       // All we need to do is check if the keys exist, otherwise throw error
-      particle_count.at(kJsonSchemaParticleCountKey);
+      particle_count.at(kJsonSchemaCountKey);
       particle_count.at(kJsonSchemaMaxVelocityKey);
       string type_name = particle_count.at(kJsonSchemaTypeKey);
       to_validate.at(kJsonSchemaParticleTypesKey).at(type_name);
@@ -186,7 +187,7 @@ void SimulationEngine::ValidateRandomGenerationJson(const json& to_validate)
   }
 }
 
-void SimulationEngine::ValidateFilePath(const string& file_path) const {
+void SimulationEngine::ValidateFilePath(const string& file_path) {
   std::ifstream located_file(file_path);
 
   if (!located_file.is_open()) {

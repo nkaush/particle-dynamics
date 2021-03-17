@@ -58,6 +58,20 @@ class SimulationEngine {
   GasContainer LoadContainerFromJson(const std::string& json_file_path) const;
 
   /**
+   * Ensures that the file corresponding to the provided file path exists.
+   * @param file_path - a string indicating the file path
+   * @throws std::invalid_argument if the file path does not exist
+   */
+  static void ValidateFilePath(const std::string& file_path);
+
+  /**
+   * Ensures that the provided json has a valid schema.
+   * @param to_validate - the json object to validate
+   * @throws std::invalid_argument when the json provided is invalid
+   */
+  static void ValidateRandomGenerationJson(const nlohmann::json& to_validate);
+
+  /**
    * Saves the current state of the simulation in a json file.
    */
   void SaveContainerToJson(const std::string& save_file_path) const;
@@ -79,6 +93,7 @@ class SimulationEngine {
   // These keys access the subsections of the json: motion and visuals
   static const std::string kJsonSchemaParticleStatesKey;
   static const std::string kJsonSchemaParticleTypesKey;
+  static const std::string kJsonSchemaParticleCountsKey;
 
   // These keys access info about a particle's motion
   static const std::string kJsonSchemaVelocityKey;
@@ -92,17 +107,10 @@ class SimulationEngine {
   static const std::string kJsonSchemaRadiusKey;
 
   // These fields are used as constraints for generating GasContainers randomly
-  static const std::string kJsonSchemaParticleCountKey;
+  static const std::string kJsonSchemaCountKey;
   static const std::string kJsonSchemaMaxVelocityKey;
 
   GasContainer container_;
-
-  /**
-   * Ensures that the provided json has a valid schema.
-   * @param to_validate - the json object to validate
-   * @throws std::invalid_argument when the json provided is invalid
-   */
-  void ValidateRandomGenerationJson(const nlohmann::json& to_validate) const;
 
   /**
    * Generates a particle with random velocity, as specified by the max velocity
@@ -133,13 +141,6 @@ class SimulationEngine {
   GasParticle CreateSpecifiedParticle(const nlohmann::json& particle_state,
                                       const nlohmann::json& particle_types)
       const;
-
-  /**
-   * Ensures that the file correspinding to the provided file path exists.
-   * @param file_path - a string indicating the file path
-   * @throws std::invalid_argument if the file path does not exist
-   */
-  void ValidateFilePath(const std::string& file_path) const;
 };
 
 }  // namespace idealgas
