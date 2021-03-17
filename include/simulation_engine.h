@@ -10,8 +10,6 @@
 #ifndef IDEAL_GAS_SIMULATION_ENGINE_H
 #define IDEAL_GAS_SIMULATION_ENGINE_H
 
-#endif  // IDEAL_GAS_SIMULATION_ENGINE_H
-
 namespace idealgas {
 
 /**
@@ -98,6 +96,52 @@ class SimulationEngine {
   static const std::string kJsonSchemaMaxVelocityKey;
 
   GasContainer container_;
+
+  /**
+   * Ensures that the provided json has a valid schema.
+   * @param to_validate - the json object to validate
+   * @throws std::invalid_argument when the json provided is invalid
+   */
+  void ValidateRandomGenerationJson(const nlohmann::json& to_validate) const;
+
+  /**
+   * Generates a particle with random velocity, as specified by the max velocity
+   * constraint. Initializes the particle according to the specified type key
+   * and the corresponding details in the type details json.Places the particle
+   * on a random position within the bounds of the GasContainer.
+   * @param random - a ci::Rand reference to use to generate random floats
+   * @param max_velocity - the absolute value of the maximum velocity a particle
+   *                       can have when starting to move
+   * @param type_details - a json object containing information about a particle
+   *                       and its color and radius
+   * @param type_key - the name associated with this particle's information
+   * @return a randomly generated GasParticle as specified
+   */
+  GasParticle GenerateRandomParticle(ci::Rand& random, float max_velocity,
+                                     const nlohmann::json& type_details,
+                                     const std::string& type_key) const;
+
+  /**
+   * Creates a GasParticle with the initial velocity, initial position, color,
+   * and radius, as specified in the json objects provided.
+   * @param particle_state - a json object containing information about this
+   *                         particle's position and velocity
+   * @param particle_types - a json object containing information about this
+   *                         particle's color and radius
+   * @return a GasParticle generated as specified
+   */
+  GasParticle CreateSpecifiedParticle(const nlohmann::json& particle_state,
+                                      const nlohmann::json& particle_types)
+      const;
+
+  /**
+   * Ensures that the file correspinding to the provided file path exists.
+   * @param file_path - a string indicating the file path
+   * @throws std::invalid_argument if the file path does not exist
+   */
+  void ValidateFilePath(const std::string& file_path) const;
 };
 
 }  // namespace idealgas
+
+#endif  // IDEAL_GAS_SIMULATION_ENGINE_H

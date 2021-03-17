@@ -50,6 +50,8 @@ GasContainer SimulationEngine::ContainerInitializer(
 
 GasContainer SimulationEngine::LoadContainerFromJson(
     const string& json_file_path) const {
+  ValidateFilePath(json_file_path);
+
   // Code below adapted from https://stackoverflow.com/a/2602060
   std::ifstream loaded_file(json_file_path);
   json json_data;
@@ -57,52 +59,59 @@ GasContainer SimulationEngine::LoadContainerFromJson(
 
   // Access the particles definitions and particle instances sub-objects
   json particle_types = json_data[kJsonSchemaParticleTypesKey];
-  json particles = json_data[kJsonSchemaParticleStatesKey];
-
   std::vector<GasParticle> gas_particles_vector;
 
   // Iterate through all objects in the array of particle instances
-  for (json::iterator it = particles.begin(); it != particles.end(); ++it) {
-    json particle_state = *it;
-
-    // Convert a json array to a vec2 for position and velocity
-    json position_array = particle_state[kJsonSchemaPositionKey];
-    json velocity_array = particle_state[kJsonSchemaVelocityKey];
-    vec2 init_position = vec2(position_array[GasContainer::kXAxis],
-                              position_array[GasContainer::kYAxis]);
-    vec2 init_velocity = vec2(velocity_array[GasContainer::kXAxis],
-                              velocity_array[GasContainer::kYAxis]);
-
-    // Get the particle definition this object is referring to
-    string particle_type_name = particle_state[kJsonSchemaTypeKey];
-    json type_details = particle_types[particle_type_name];
-
-    // Create particle with particle definition and vectors created above
-    GasParticle gas_particle = GasParticle(init_position, init_velocity,
-      type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaRedKey],
-      type_details[kJsonSchemaGreenKey], type_details[kJsonSchemaBlueKey],
-      particle_type_name);
+  for (const json& particle_state : json_data[kJsonSchemaParticleStatesKey]) {
+    GasParticle gas_particle =
+        CreateSpecifiedParticle(particle_state, particle_types);
     gas_particles_vector.push_back(gas_particle);
   }
 
   return GasContainer(gas_particles_vector);
 }
 
+GasParticle SimulationEngine::CreateSpecifiedParticle(
+    const json& particle_state, const json& particle_types) const {
+  // Convert a json array to a vec2 for position and velocity
+  json position_array = particle_state[kJsonSchemaPositionKey];
+  json velocity_array = particle_state[kJsonSchemaVelocityKey];
+  vec2 init_position = vec2(position_array[GasContainer::kXAxis],
+                            position_array[GasContainer::kYAxis]);
+  vec2 init_velocity = vec2(velocity_array[GasContainer::kXAxis],
+                            velocity_array[GasContainer::kYAxis]);
+
+  // Get the particle definition this object is referring to
+  string particle_type_name = particle_state[kJsonSchemaTypeKey];
+  json type_details = particle_types[particle_type_name];
+
+  // Create particle with particle definition and vectors created above
+  GasParticle gas_particle = GasParticle(init_position, init_velocity,
+    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaRedKey],
+    type_details[kJsonSchemaGreenKey], type_details[kJsonSchemaBlueKey],
+    particle_type_name);
+
+  return gas_particle;
+}
+
 GasContainer SimulationEngine::GenerateRandomContainerFromJson(
     const string& json_file_path) const {
+  ValidateFilePath(json_file_path);
+
+  // Load the file as json if the path is valid
   std::ifstream loaded_file(json_file_path);
   json json_data;
   loaded_file >> json_data;
 
+  ValidateRandomGenerationJson(json_data);
+
   json particle_types = json_data[kJsonSchemaParticleTypesKey];
-  json count_info = json_data[kJsonSchemaParticleStatesKey];
 
   std::vector<GasParticle> gas_particles_vector;
   ci::Rand random = ci::Rand();
 
-  for (json::iterator it = count_info.begin(); it != count_info.end(); ++it) {
-    json particle_specification = *it;
-
+  // Go through each particle type requested to create and create all of them
+  for (json particle_specification : json_data[kJsonSchemaParticleStatesKey]) {
     string particle_type_key = particle_specification[kJsonSchemaTypeKey];
     json type_details = particle_types[particle_type_key];
 
@@ -110,25 +119,79 @@ GasContainer SimulationEngine::GenerateRandomContainerFromJson(
     float max_velocity = particle_specification[kJsonSchemaMaxVelocityKey];
 
     for (size_t idx = 0; idx < specified_count; idx++) {
-      // velocity is a vec2 of values between -max_velocity and max_velocity
-      vec2 velocity = vec2(random.posNegFloat(0, max_velocity),
-                           random.posNegFloat(0, max_velocity));
-
-      float x_position = random.nextFloat(GasContainer::kContainerLeftBound,
-                                          GasContainer::kContainerRightBound);
-      float y_position = random.nextFloat(GasContainer::kContainerUpperBound,
-                                          GasContainer::kContainerLowerBound);
-      vec2 position = vec2(x_position, y_position);
-
-      GasParticle gas_particle = GasParticle(position, velocity,
-        type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaRedKey],
-        type_details[kJsonSchemaGreenKey], type_details[kJsonSchemaBlueKey],
-        particle_type_key);
-      gas_particles_vector.push_back(gas_particle);
+      GasParticle particle = GenerateRandomParticle(random, max_velocity,
+                                                    type_details,
+                                                    particle_type_key);
+      gas_particles_vector.push_back(particle);
     }
   }
 
   return GasContainer(gas_particles_vector);
+}
+
+GasParticle SimulationEngine::GenerateRandomParticle(
+    ci::Rand& random, float max_velo, const json& type_details,
+    const string& type_key) const {
+  // velocity is a vec2 of values between -max_velocity and max_velocity
+  vec2 velocity = vec2(random.posNegFloat(0, max_velo),
+                       random.posNegFloat(0, max_velo));
+
+  // Generate a random position within the bounds of the container
+  float x_position = random.nextFloat(GasContainer::kContainerLeftBound,
+                                      GasContainer::kContainerRightBound);
+  float y_position = random.nextFloat(GasContainer::kContainerUpperBound,
+                                      GasContainer::kContainerLowerBound);
+  vec2 position = vec2(x_position, y_position);
+
+  GasParticle gas_particle = GasParticle(position, velocity,
+    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaRedKey],
+    type_details[kJsonSchemaGreenKey], type_details[kJsonSchemaBlueKey],
+    type_key);
+  return gas_particle;
+}
+
+void SimulationEngine::ValidateRandomGenerationJson(const json& to_validate)
+    const {
+  // Check if the 2 json sub-objects containing all important info exist
+  try {
+    to_validate.at(kJsonSchemaParticleStatesKey);
+    to_validate.at(kJsonSchemaParticleTypesKey);
+  } catch (json::exception& e) {
+    throw std::invalid_argument("The provided json is invalid");
+  }
+
+  // Check the particle counts schema
+  for (const json& particle_count : to_validate[kJsonSchemaParticleStatesKey]) {
+    try {
+      // All we need to do is check if the keys exist, otherwise throw error
+      particle_count.at(kJsonSchemaParticleCountKey);
+      particle_count.at(kJsonSchemaMaxVelocityKey);
+      string type_name = particle_count.at(kJsonSchemaTypeKey);
+      to_validate.at(kJsonSchemaParticleTypesKey).at(type_name);
+    } catch (json::exception& e) {
+      throw std::invalid_argument("The provided json is invalid");
+    }
+  }
+
+  // Check the particle definitions schema
+  for (const json& particle_def : to_validate[kJsonSchemaParticleTypesKey]) {
+    try {
+      particle_def.at(kJsonSchemaRedKey);
+      particle_def.at(kJsonSchemaRadiusKey);
+      particle_def.at(kJsonSchemaGreenKey);
+      particle_def.at(kJsonSchemaBlueKey);
+    } catch (json::exception& e) {
+      throw std::invalid_argument("The provided json is invalid");
+    }
+  }
+}
+
+void SimulationEngine::ValidateFilePath(const string& file_path) const {
+  std::ifstream located_file(file_path);
+
+  if (!located_file.is_open()) {
+    throw std::invalid_argument("The file path is not valid");
+  }
 }
 
 void SimulationEngine::SaveContainerToJson(const string& save_file_path) const {
