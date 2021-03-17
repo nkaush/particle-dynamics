@@ -44,7 +44,7 @@ class GasParticle {
    * @param name - the name assigned to this particle when deserializing json
    */
   GasParticle(const glm::vec2& initial_pos, const glm::vec2& initial_velo,
-              float radius, float red, float green, float blue,
+              float radius, float mass, float red, float green, float blue,
               const std::string& name);
 
   /**
@@ -65,6 +65,8 @@ class GasParticle {
 
   float GetRadius() const;
 
+  float GetMass() const;
+
   float GetRedIntensity() const;
 
   float GetGreenIntensity() const;
@@ -82,6 +84,7 @@ class GasParticle {
   glm::vec2 velocity_;
 
   float radius_;
+  float mass_;
   // Colors to display between 0 and 1 (1 translates to 255 in decimal RGB)
   float red_color_intensity_;
   float green_color_intensity_;

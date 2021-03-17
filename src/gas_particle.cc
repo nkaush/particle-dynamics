@@ -12,16 +12,18 @@ using std::string;
 using nlohmann::json;
 
 GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
-                         const ParticleSpecs& specs) : position_(initial_pos), velocity_(initial_velo),
-      radius_(specs.radius), red_color_intensity_(specs.red), green_color_intensity_(specs.green),
-      blue_color_intensity_(specs.blue), particle_type_name_(specs.name) {}
+                         const ParticleSpecs& specs) : position_(initial_pos),
+      velocity_(initial_velo), radius_(specs.radius), mass_(1),
+      red_color_intensity_(specs.red), green_color_intensity_(specs.green),
+      blue_color_intensity_(specs.blue), particle_type_name_(specs.name){}
 
 GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
-                         float radius_to_set, float red, float green, float blue,
-                         const string& name) :
+                         float radius_to_set, float mass_to_set, float red,
+                         float green, float blue, const string& name) :
       position_(initial_pos), velocity_(initial_velo), radius_(radius_to_set),
-      red_color_intensity_(red), green_color_intensity_(green),
-      blue_color_intensity_(blue), particle_type_name_(name) {}
+      mass_(mass_to_set), red_color_intensity_(red),
+      green_color_intensity_(green), blue_color_intensity_(blue),
+      particle_type_name_(name) {}
 
 void GasParticle::UpdatePosition() {
   position_ += velocity_;
@@ -37,6 +39,10 @@ glm::vec2 GasParticle::GetPosition() const {
 
 float GasParticle::GetRadius() const {
   return radius_;
+}
+
+float GasParticle::GetMass() const {
+  return mass_;
 }
 
 float GasParticle::GetRedIntensity() const {

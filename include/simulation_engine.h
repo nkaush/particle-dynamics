@@ -105,6 +105,7 @@ class SimulationEngine {
   static const std::string kJsonSchemaGreenKey;
   static const std::string kJsonSchemaBlueKey;
   static const std::string kJsonSchemaRadiusKey;
+  static const std::string kJsonSchemaMassKey;
 
   // These fields are used as constraints for generating GasContainers randomly
   static const std::string kJsonSchemaCountKey;

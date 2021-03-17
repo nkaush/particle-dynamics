@@ -32,6 +32,7 @@ const string SimulationEngine::kJsonSchemaRedKey = "red";
 const string SimulationEngine::kJsonSchemaGreenKey = "green";
 const string SimulationEngine::kJsonSchemaBlueKey = "blue";
 const string SimulationEngine::kJsonSchemaRadiusKey = "radius";
+const string SimulationEngine::kJsonSchemaMassKey = "mass";
 
 // These fields are used as constraints for generating GasContainers randomly
 const string SimulationEngine::kJsonSchemaCountKey = "count";
@@ -88,9 +89,9 @@ GasParticle SimulationEngine::CreateSpecifiedParticle(
 
   // Create particle with particle definition and vectors created above
   GasParticle gas_particle = GasParticle(init_position, init_velocity,
-    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaRedKey],
-    type_details[kJsonSchemaGreenKey], type_details[kJsonSchemaBlueKey],
-    particle_type_name);
+    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaMassKey],
+    type_details[kJsonSchemaRedKey], type_details[kJsonSchemaGreenKey],
+    type_details[kJsonSchemaBlueKey], particle_type_name);
 
   return gas_particle;
 }
@@ -146,9 +147,9 @@ GasParticle SimulationEngine::GenerateRandomParticle(
   vec2 position = vec2(x_position, y_position);
 
   GasParticle gas_particle = GasParticle(position, velocity,
-    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaRedKey],
-    type_details[kJsonSchemaGreenKey], type_details[kJsonSchemaBlueKey],
-    type_key);
+    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaMassKey],
+    type_details[kJsonSchemaRedKey], type_details[kJsonSchemaGreenKey],
+    type_details[kJsonSchemaBlueKey], type_key);
   return gas_particle;
 }
 
@@ -226,6 +227,7 @@ json SimulationEngine::SerializeParticle(const GasParticle& particle,
   } catch (json::exception& e) {
     particle_types[type_name] = {
         {kJsonSchemaRadiusKey, particle.GetRadius()},
+        {kJsonSchemaMassKey, particle.GetMass()},
         {kJsonSchemaRedKey, particle.GetRedIntensity()},
         {kJsonSchemaGreenKey, particle.GetGreenIntensity()},
         {kJsonSchemaBlueKey, particle.GetBlueIntensity()}

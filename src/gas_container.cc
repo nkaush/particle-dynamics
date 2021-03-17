@@ -93,13 +93,15 @@ vec2 GasContainer::CalculateParticleVelocityAfterCollision(
     const GasParticle& particle_one, const GasParticle& particle_two) {
   vec2 velo_diff = particle_one.GetVelocity() - particle_two.GetVelocity();
   vec2 pos_diff = particle_one.GetPosition() - particle_two.GetPosition();
+  float mass_sum = particle_one.GetMass() + particle_two.GetMass();
 
   float velo_pos_dot_product = dot(velo_diff, pos_diff);
   float pos_diff_length = glm::length(pos_diff);
+  float mass_scalar = (2 * particle_two.GetMass()) / mass_sum;
 
   float squared_pos_diff_length = pos_diff_length * pos_diff_length;
   float velo_change_scalar = velo_pos_dot_product / squared_pos_diff_length;
-  vec2 velocity_change = velo_change_scalar * pos_diff;
+  vec2 velocity_change = mass_scalar * velo_change_scalar * pos_diff;
 
   return particle_one.GetVelocity() - velocity_change;
 }

@@ -4,36 +4,39 @@
       "red": 0.2,
       "green": 0.79,
       "blue": 0.5,
-      "radius": 7
+      "radius": 7,
+      "mass": 10
     },
     "oxygen": {
       "red": 0.76,
       "green": 0.16,
       "blue": 0.18,
-      "radius": 5
+      "radius": 5,
+      "mass": 7
     },
     "hydrogen": {
       "red": 0.95,
       "green": 0.83,
       "blue": 0.01,
-      "radius": 3
+      "radius": 3,
+      "mass": 1
     }
   },
-  "particle_states": [
+  "particle_counts": [
     {
       "type": "oxygen",
-      "particle_count": 25,
-      "max_velocity": 2
+      "count": 25,
+      "max_velocity": 1
     },
     {
       "type": "hydrogen",
-      "particle_count": 50,
+      "count": 75,
       "max_velocity": 2
     },
     {
       "type": "carbon",
-      "particle_count": 25,
-      "max_velocity": 2
+      "count": 25,
+      "max_velocity": 0.5
     }
   ]
 }
