@@ -141,6 +141,9 @@ class SimulationEngine {
   GasParticle CreateSpecifiedParticle(const nlohmann::json& particle_state,
                                       const nlohmann::json& particle_types)
       const;
+
+  nlohmann::json SerializeParticle(const GasParticle& particle,
+                                   nlohmann::json& particle_types) const;
 };
 
 }  // namespace idealgas

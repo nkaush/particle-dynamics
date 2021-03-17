@@ -157,7 +157,7 @@ void SimulationEngine::ValidateRandomGenerationJson(const json& to_validate) {
   try {
     to_validate.at(kJsonSchemaParticleCountsKey);
     to_validate.at(kJsonSchemaParticleTypesKey);
-  } catch (json::exception& e) {
+  } catch (json::out_of_range& e) {
     throw std::invalid_argument("The provided json is invalid");
   }
 
@@ -169,7 +169,7 @@ void SimulationEngine::ValidateRandomGenerationJson(const json& to_validate) {
       particle_count.at(kJsonSchemaMaxVelocityKey);
       string type_name = particle_count.at(kJsonSchemaTypeKey);
       to_validate.at(kJsonSchemaParticleTypesKey).at(type_name);
-    } catch (json::exception& e) {
+    } catch (json::out_of_range& e) {
       throw std::invalid_argument("The provided json is invalid");
     }
   }
@@ -181,7 +181,7 @@ void SimulationEngine::ValidateRandomGenerationJson(const json& to_validate) {
       particle_def.at(kJsonSchemaRadiusKey);
       particle_def.at(kJsonSchemaGreenKey);
       particle_def.at(kJsonSchemaBlueKey);
-    } catch (json::exception& e) {
+    } catch (json::out_of_range& e) {
       throw std::invalid_argument("The provided json is invalid");
     }
   }
@@ -200,33 +200,7 @@ void SimulationEngine::SaveContainerToJson(const string& save_file_path) const {
   json particle_array;
 
   for (const GasParticle& particle : container_.GetAllParticles()) {
-    json serialized_particle;
-    string type_name = particle.GetTypeName();
-    serialized_particle[kJsonSchemaTypeKey] = type_name;
-
-    // Add the particle state definition to the json if it is not defined yet
-    try {
-      particle_types.at(type_name);
-      // no way to actually check if a key exists so use try/catch
-    } catch (json::exception& e) {
-      particle_types[type_name] = {
-          {kJsonSchemaRadiusKey, particle.GetRadius()},
-          {kJsonSchemaRedKey, particle.GetRedIntensity()},
-          {kJsonSchemaGreenKey, particle.GetGreenIntensity()},
-          {kJsonSchemaBlueKey, particle.GetBlueIntensity()}
-      };
-    }
-
-    json position_array;  // save the position array
-    position_array.push_back(particle.GetPosition()[GasContainer::kXAxis]);
-    position_array.push_back(particle.GetPosition()[GasContainer::kYAxis]);
-    serialized_particle[kJsonSchemaPositionKey] = position_array;
-
-    json velocity_array;  // save the velocity array
-    velocity_array.push_back(particle.GetVelocity()[GasContainer::kXAxis]);
-    velocity_array.push_back(particle.GetVelocity()[GasContainer::kYAxis]);
-    serialized_particle[kJsonSchemaVelocityKey] = velocity_array;
-
+    json serialized_particle = SerializeParticle(particle, particle_types);
     particle_array.push_back(serialized_particle);
   }
 
@@ -237,6 +211,38 @@ void SimulationEngine::SaveContainerToJson(const string& save_file_path) const {
   // write the json to the saved file
   std::ofstream output_file(save_file_path);
   output_file << std::setw(4) << output << std::endl;
+}
+
+json SimulationEngine::SerializeParticle(const GasParticle& particle,
+                                         json& particle_types) const {
+  json serialized_particle;
+  string type_name = particle.GetTypeName();
+  serialized_particle[kJsonSchemaTypeKey] = type_name;
+
+  // Add the particle state definition to the json if it is not defined yet
+  try {
+    particle_types.at(type_name);
+    // no way to actually check if a key exists so use try/catch
+  } catch (json::exception& e) {
+    particle_types[type_name] = {
+        {kJsonSchemaRadiusKey, particle.GetRadius()},
+        {kJsonSchemaRedKey, particle.GetRedIntensity()},
+        {kJsonSchemaGreenKey, particle.GetGreenIntensity()},
+        {kJsonSchemaBlueKey, particle.GetBlueIntensity()}
+    };
+  }
+
+  json position_array;  // save the position array
+  position_array.push_back(particle.GetPosition()[GasContainer::kXAxis]);
+  position_array.push_back(particle.GetPosition()[GasContainer::kYAxis]);
+  serialized_particle[kJsonSchemaPositionKey] = position_array;
+
+  json velocity_array;  // save the velocity array
+  velocity_array.push_back(particle.GetVelocity()[GasContainer::kXAxis]);
+  velocity_array.push_back(particle.GetVelocity()[GasContainer::kYAxis]);
+  serialized_particle[kJsonSchemaVelocityKey] = velocity_array;
+
+  return serialized_particle;
 }
 
 void SimulationEngine::AdvanceToNextFrame() {
