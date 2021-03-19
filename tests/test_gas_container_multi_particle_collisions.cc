@@ -18,10 +18,10 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
   ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
 
   SECTION("Touching particles colliding perfectly diagonal") {
-    GasParticle particle_one = CreateParticle(200, 200, 0.1, 0, specs);
-    GasParticle particle_two = CreateParticle(201.4, 201.4, -0.1, 0, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 0.1, 0, specs);
+    GasParticle particle_two = CreateParticle(351.4, 351.4, -0.1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -33,10 +33,10 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
   }
 
   SECTION("Touching particles head-on colliding parallel to x-axis") {
-    GasParticle particle_one = CreateParticle(200, 200, 1, 0, specs);
-    GasParticle particle_two = CreateParticle(202, 200, -1, 0, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
+    GasParticle particle_two = CreateParticle(352, 350, -1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -48,10 +48,10 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
   }
 
   SECTION("Touching particles head-on colliding parallel to y-axis") {
-    GasParticle particle_one = CreateParticle(200, 200, 0, 1, specs);
-    GasParticle particle_two = CreateParticle(200, 202, 0, -1, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 0, 1, specs);
+    GasParticle particle_two = CreateParticle(350, 352, 0, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -63,10 +63,10 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
   }
 
   SECTION("Touching particles collide in T-bone crash") {
-    GasParticle particle_one = CreateParticle(200, 200, 1, 0, specs);
-    GasParticle particle_two = CreateParticle(200, 202, 0, -1, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
+    GasParticle particle_two = CreateParticle(350, 352, 0, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -78,10 +78,10 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
   }
 
   SECTION("Faster particle hits slower particle moving in same direction") {
-    GasParticle particle_one = CreateParticle(200, 200, 3, 0, specs);
-    GasParticle particle_two = CreateParticle(202, 200, 1, 0, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 3, 0, specs);
+    GasParticle particle_two = CreateParticle(352, 350, 1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -93,10 +93,10 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
   }
 
   SECTION("Particles moving on perpendicular diagonals collide") {
-    GasParticle particle_one = CreateParticle(200, 200, 1, -1, specs);
-    GasParticle particle_two = CreateParticle(202, 200, -1, -1, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 1, -1, specs);
+    GasParticle particle_two = CreateParticle(352, 350, -1, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -112,10 +112,10 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
   ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
 
   SECTION("Overlapping particles head-on colliding parallel to y-axis") {
-    GasParticle particle_one = CreateParticle(200, 200, 0, 0.1, specs);
-    GasParticle particle_two = CreateParticle(200, 201, 0, -0.1, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 0, 0.1, specs);
+    GasParticle particle_two = CreateParticle(350, 351, 0, -0.1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -142,10 +142,10 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
   }
 
   SECTION("Overlapping particles head-on colliding parallel to x-axis") {
-    GasParticle particle_one = CreateParticle(200, 200, 0.1, 0, specs);
-    GasParticle particle_two = CreateParticle(201, 200, -0.1, 0, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 0.1, 0, specs);
+    GasParticle particle_two = CreateParticle(351, 350, -0.1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -172,10 +172,10 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
   }
 
   SECTION("Overlapping particles colliding perfectly diagonal") {
-    GasParticle particle_one = CreateParticle(200, 200, 0.1, 0, specs);
-    GasParticle particle_two = CreateParticle(200.7, 200.7, -0.1, 0, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 0.1, 0, specs);
+    GasParticle particle_two = CreateParticle(350.7, 350.7, -0.1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -206,10 +206,10 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
 TEST_CASE("Particles Are Not Colliding") {
   ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
   SECTION("Particles are not colliding") {
-    GasParticle particle_one = CreateParticle(200, 200, 0, 1, specs);
-    GasParticle particle_two = CreateParticle(200, 300, 0, -1, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 0, 1, specs);
+    GasParticle particle_two = CreateParticle(350, 300, 0, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -221,10 +221,10 @@ TEST_CASE("Particles Are Not Colliding") {
   }
 
   SECTION("Particles are overlapping but moving away on different axis") {
-    GasParticle particle_one = CreateParticle(200, 200, 1, 0, specs);
-    GasParticle particle_two = CreateParticle(200, 201, -1, 0, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
+    GasParticle particle_two = CreateParticle(350, 351, -1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -236,10 +236,10 @@ TEST_CASE("Particles Are Not Colliding") {
   }
 
   SECTION("Particles are overlapping but moving same direction") {
-    GasParticle particle_one = CreateParticle(200, 200, 1, 0, specs);
-    GasParticle particle_two = CreateParticle(200, 201, 1, 0, specs);
+    GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
+    GasParticle particle_two = CreateParticle(350, 351, 1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two});
+    GasContainer container = GasContainer({particle_one, particle_two}, 1);
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =

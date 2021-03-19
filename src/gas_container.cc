@@ -8,8 +8,9 @@ using std::vector;
 // Define the non-literal constants in this class
 const char* GasContainer::kWallColor = "white";
 
-GasContainer::GasContainer(const vector<GasParticle>& particles) :
-      all_particles_(particles) {}
+GasContainer::GasContainer(
+    const vector<GasParticle>& particles, size_t type_counts) :
+      all_particles_(particles), particle_types_count_(type_counts) {}
 
 void GasContainer::Display() const {
   ci::gl::color(ci::Color(kWallColor));
@@ -26,6 +27,11 @@ void GasContainer::Display() const {
 vector<GasParticle> GasContainer::GetAllParticles() const {
   return all_particles_;
 }
+
+size_t GasContainer::GetParticleTypesCount() const {
+  return particle_types_count_;
+}
+
 
 void GasContainer::AdvanceOneFrame() {
   HandleParticleWallInteractions();

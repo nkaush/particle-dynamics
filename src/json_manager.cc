@@ -48,7 +48,7 @@ GasContainer JsonManager::LoadContainerFromJson(
     gas_particles_vector.push_back(gas_particle);
   }
 
-  return GasContainer(gas_particles_vector);
+  return GasContainer(gas_particles_vector, particle_types.size());
 }
 
 GasParticle JsonManager::CreateSpecifiedParticle(
@@ -86,7 +86,6 @@ GasContainer JsonManager::GenerateRandomContainerFromJson(
   ValidateRandomGenerationJson(json_data);
 
   json particle_types = json_data[kJsonSchemaParticleTypesKey];
-
   std::vector<GasParticle> gas_particles_vector;
   ci::Rand random = ci::Rand();
 
@@ -107,7 +106,7 @@ GasContainer JsonManager::GenerateRandomContainerFromJson(
     }
   }
 
-  return GasContainer(gas_particles_vector);
+  return GasContainer(gas_particles_vector, particle_types.size());
 }
 
 GasParticle JsonManager::GenerateRandomParticle(

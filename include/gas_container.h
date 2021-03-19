@@ -15,10 +15,10 @@ class GasContainer {
   static const char* kWallColor;
 
   // Define the bounds of the container on top, bottom, left, and right walls
-  static constexpr float kContainerUpperBound = 100;
-  static constexpr float kContainerLowerBound = 400;
-  static constexpr float kContainerLeftBound = 100;
-  static constexpr float kContainerRightBound = 600;
+  static constexpr float kContainerUpperBound = 50;
+  static constexpr float kContainerLowerBound = 450;
+  static constexpr float kContainerLeftBound = 300;
+  static constexpr float kContainerRightBound = 700;
 
   // Used to access values corresponding to an specific axis
   static constexpr size_t kXAxis = 0;
@@ -28,8 +28,10 @@ class GasContainer {
    * Initializes a GasContainer and populates it with the particles given in the
    * provided vector of GasParticles.
    * @param particles - a vector of GasParticle to add to the container
+   * @param type_counts - a size_t indicating the number of unique particle
+   *                      types to track number of histograms
    */
-  GasContainer(const std::vector<GasParticle>& particles);
+  GasContainer(const std::vector<GasParticle>& particles, size_t type_counts);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -48,9 +50,18 @@ class GasContainer {
    */
   std::vector<GasParticle> GetAllParticles() const;
 
+  /**
+   * Getter for the number of particle types in the container.
+   * @return a size_t indicating the number of particle types
+   */
+  size_t GetParticleTypesCount() const;
+
  private:
   // stores the particles in the container
   std::vector<GasParticle> all_particles_;
+
+  // This variable tracks the number of types of particles (and histograms).
+  size_t particle_types_count_;
 
   /**
    * Handles the logic of all particle interactions with walls and adjusts
