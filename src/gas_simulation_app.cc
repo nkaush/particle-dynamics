@@ -21,7 +21,7 @@ void IdealGasApp::update() {
 
 void IdealGasApp::keyDown(KeyEvent event) {
   if (event.getChar() == kSaveToJsonKey) {
-    engine_.SaveContainerToJson(SimulationEngine::kJsonStateFilePath);
+    engine_.SaveSimulation();
     console() << "Simulation Saved!" << std::endl;
   }
 }

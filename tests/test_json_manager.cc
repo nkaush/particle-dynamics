@@ -1,12 +1,12 @@
 #include <catch2/catch.hpp>
-#include <simulation_engine.h>
+#include <json_manager.h>
 
-using idealgas::SimulationEngine;
+using idealgas::JsonManager;
 using nlohmann::json;
 
 TEST_CASE("Test Missing File") {
   SECTION("Test Invalid File Path") {
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateFilePath("does/not/exist.json"),
+    REQUIRE_THROWS_AS(JsonManager::ValidateFilePath("does/not/exist.json"),
                       std::invalid_argument);
   }
 }
@@ -14,7 +14,7 @@ TEST_CASE("Test Missing File") {
 TEST_CASE("Testing JSON Deserialization With Invalid Count Specifications") {
   SECTION("Missing particle counts key") {
     json to_check = {{"particle_counts", {}}};
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -24,7 +24,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Count Specifications") {
         "\"green\": 0.79, \"blue\": 0.5, \"radius\": 7}},"
         "\"particle_counts\": [{\"type\": \"oxygen\", "
         "\"max_velocity\": 2}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -34,7 +34,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Count Specifications") {
         "\"green\": 0.79, \"blue\": 0.5, \"radius\": 7}},"
         "\"particle_counts\": [{\"count\": 20, "
         "\"max_velocity\": 2}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -44,7 +44,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Count Specifications") {
         "\"green\": 0.79, \"blue\": 0.5, \"radius\": 7}},"
         "\"particle_counts\": [{\"count\": 20, "
         "\"type\": \"carbon\"}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -54,7 +54,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Count Specifications") {
         "\"green\": 0.79, \"blue\": 0.5, \"radius\": 7}},"
         "\"particle_counts\": [{\"count\": 20, "
         "\"type\": \"oxygen\", \"max_velocity\": 2}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 }
@@ -62,7 +62,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Count Specifications") {
 TEST_CASE("Testing JSON Deserialization With Invalid Type Specifications") {
   SECTION("Missing particle types key") {
     json to_check = {{"particle_types", {}}};
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -72,7 +72,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Type Specifications") {
         "\"green\": 0.79, \"blue\": 0.5, \"radius\": 7}},"
         "\"particle_counts\": [{\"count\": 20, "
         "\"type\": \"oxygen\", \"max_velocity\": 2}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -81,7 +81,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Type Specifications") {
         "{\"particle_types\": {\"oxygen\": {\"red\": 0.2, "
         "\"blue\": 0.5, \"radius\": 7}},\"particle_counts\": [{\"count\": 20, "
         "\"type\": \"oxygen\", \"max_velocity\": 2}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -91,7 +91,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Type Specifications") {
         "\"green\": 0.79, \"radius\": 7}},"
         "\"particle_counts\": [{\"count\": 20, "
         "\"type\": \"oxygen\", \"max_velocity\": 2}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 
@@ -101,7 +101,7 @@ TEST_CASE("Testing JSON Deserialization With Invalid Type Specifications") {
         "\"green\": 0.79, \"blue\": 0.5}},"
         "\"particle_counts\": [{\"count\": 20, "
         "\"type\": \"oxygen\", \"max_velocity\": 2}]}"_json;
-    REQUIRE_THROWS_AS(SimulationEngine::ValidateRandomGenerationJson(to_check),
+    REQUIRE_THROWS_AS(JsonManager::ValidateRandomGenerationJson(to_check),
                       std::invalid_argument);
   }
 }

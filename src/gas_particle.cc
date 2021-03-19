@@ -9,12 +9,12 @@ using glm::vec2;
 using std::string;
 
 GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
-                         const ParticleSpecs& specs) : position_(initial_pos),
-      velocity_(initial_velo), radius_(specs.radius), mass_(specs.mass),
-      red_intensity_(specs.red_intensity),
+                         const ParticleSpecs& specs) :
+      position_(initial_pos), velocity_(initial_velo), radius_(specs.radius),
+      mass_(specs.mass), red_intensity_(specs.red_intensity),
       green_intensity_(specs.green_intensity),
       blue_intensity_(specs.blue_intensity),
-      particle_type_name_(specs.name){}
+      particle_type_name_(specs.name) {}
 
 GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
                          float radius_to_set, float mass_to_set, float red,

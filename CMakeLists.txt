@@ -67,13 +67,14 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/gas_particle.cc
                             src/simulation_engine.cc
                             src/histogram.cc
+                            src/json_manager.cc
                             src/data/saved_simulation.json
                             src/data/random_simulation_generator.json)
 
 list(APPEND TEST_FILES tests/test_gas_particle.cc
                        tests/test_gas_container_multi_particle_collisions.cc
                        tests/test_gas_container_particle_wall_collisions.cc
-                       tests/test_simulation_engine.cc
+                       tests/test_json_manager.cc
                        tests/test_helper.cc)
 
 ci_make_app(
