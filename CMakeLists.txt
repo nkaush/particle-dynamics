@@ -66,6 +66,7 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/gas_simulation_app.cc
                             src/gas_particle.cc
                             src/simulation_engine.cc
+                            src/histogram.cc
                             src/data/saved_simulation.json
                             src/data/random_simulation_generator.json)
 

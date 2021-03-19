@@ -1,8 +1,6 @@
 #include "simulation_engine.h"
 #include "cinder/Rand.h"
 
-#include <nlohmann/json.hpp>
-
 namespace idealgas {
 
 using glm::vec2;

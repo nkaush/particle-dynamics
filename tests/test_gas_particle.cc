@@ -10,7 +10,7 @@ using idealgas::ParticleSpecs;
 using glm::vec2;
 
 TEST_CASE("Testing Particle Position Updating") {
-  ParticleSpecs specs = {1, 255, 255, 255, "test"};
+  ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
   SECTION("Increment position with positive x-axis velocity") {
     GasParticle particle = GasParticle(vec2(19.9, 20),
                                        vec2(0.1, 0), specs);

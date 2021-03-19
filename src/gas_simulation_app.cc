@@ -4,7 +4,7 @@ namespace idealgas {
 
 using cinder::app::KeyEvent;
 
-IdealGasApp::IdealGasApp() : engine_(SimulationEngine(false)) {
+IdealGasApp::IdealGasApp() : engine_(SimulationEngine(true)) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
 
@@ -18,6 +18,7 @@ void IdealGasApp::draw() {
 void IdealGasApp::update() {
   engine_.AdvanceToNextFrame();
 }
+
 void IdealGasApp::keyDown(KeyEvent event) {
   if (event.getChar() == kSaveToJsonKey) {
     engine_.SaveContainerToJson(SimulationEngine::kJsonStateFilePath);

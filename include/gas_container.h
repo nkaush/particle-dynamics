@@ -53,10 +53,16 @@ class GasContainer {
   std::vector<GasParticle> all_particles_;
 
   /**
-   * Handles the logic of all particle interactions and adjusts particle
-   * velocities according to the laws of physics.
+   * Handles the logic of all particle interactions with walls and adjusts
+   * particle velocities according to the laws of physics.
    */
-  void HandleParticleInteractions();
+  void HandleParticleWallInteractions();
+
+  /**
+   * Handles the logic of all particle interactions with other particles and
+   * adjusts both particle velocities according to the laws of physics.
+   */
+  void HandleMultiParticleInteractions();
 
   /**
    * Calculates the velocity of a particle if it hits a wall, otherwise returns
@@ -79,10 +85,9 @@ class GasContainer {
    * @return a bool indicating whether the given particle is colliding with the
    * given walls
    */
-  static bool IsParticleCollidingWithWalls(const GasParticle& particle,
-                                           size_t axis_idx,
-                                           float min_wall_bound,
-                                           float max_wall_bound);
+  static bool IsParticleCollidingWithWallsOnAxis(
+      const GasParticle& particle, size_t axis_idx,
+      float min_wall_bound, float max_wall_bound);
 
   /**
    * Checks whether two particles are colliding - whether they are touching or

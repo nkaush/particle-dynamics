@@ -12,7 +12,7 @@ using glm::vec2;
 
 TEST_CASE("Testing Particle on Wall Collisions Parallel to Axes") {
   float radius = 1;
-  ParticleSpecs specs = {radius, 255, 255, 255, "test"};
+  ParticleSpecs specs = {radius, 1, 255, 255, 255, "test"};
 
   SECTION("Particle collides parallel to y-axis with upper wall") {
     float wall_bound = GasContainer::kContainerUpperBound + radius;
@@ -57,7 +57,7 @@ TEST_CASE("Testing Particle on Wall Collisions Parallel to Axes") {
 
 TEST_CASE("Testing Particle on Wall Collisions Diagonally Bounce Off Walls") {
   float radius = 1;
-  ParticleSpecs specs = {radius, 255, 255, 255, "test"};
+  ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
 
   SECTION("Particle diagonally collides with upper wall") {
     float wall_bound = GasContainer::kContainerUpperBound + radius;
@@ -102,7 +102,7 @@ TEST_CASE("Testing Particle on Wall Collisions Diagonally Bounce Off Walls") {
 
 TEST_CASE("Testing Particle on Wall Collisions in the Corners of Container") {
   float radius = 1;
-  ParticleSpecs specs = {radius, 255, 255, 255, "test"};
+  ParticleSpecs specs = {radius, 1, 255, 255, 255, "test"};
 
   SECTION("Particle collides at corner upper and left walls") {
     float x_axis_bound = GasContainer::kContainerLeftBound + radius;
@@ -154,7 +154,7 @@ TEST_CASE("Testing Particle on Wall Collisions in the Corners of Container") {
 }
 
 TEST_CASE("Testing Particles Overlapping Walls on Collision") {
-  ParticleSpecs specs = {1, 255, 255, 255, "test"};
+  ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
 
   SECTION("Particle overlaps left wall") {
     float wall_bound = GasContainer::kContainerLeftBound;

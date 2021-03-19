@@ -15,7 +15,7 @@ using idealgas_test::AreResultsAccurate;
 using glm::vec2;
 
 TEST_CASE("Testing Touching Particle on Particle Collisions") {
-  ParticleSpecs specs = {1, 255, 255, 255, "test"};
+  ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
 
   SECTION("Touching particles colliding perfectly diagonal") {
     GasParticle particle_one = CreateParticle(200, 200, 0.1, 0, specs);
@@ -109,7 +109,7 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
 }
 
 TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
-  ParticleSpecs specs = {1, 255, 255, 255, "test"};
+  ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
 
   SECTION("Overlapping particles head-on colliding parallel to y-axis") {
     GasParticle particle_one = CreateParticle(200, 200, 0, 0.1, specs);
@@ -204,7 +204,7 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
 }
 
 TEST_CASE("Particles Are Not Colliding") {
-  ParticleSpecs specs = {1, 255, 255, 255, "test"};
+  ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
   SECTION("Particles are not colliding") {
     GasParticle particle_one = CreateParticle(200, 200, 0, 1, specs);
     GasParticle particle_two = CreateParticle(200, 300, 0, -1, specs);

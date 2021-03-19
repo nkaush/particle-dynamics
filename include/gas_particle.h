@@ -12,9 +12,10 @@ namespace idealgas {
  */
 struct ParticleSpecs {
   float radius;
-  float red;
-  float green;
-  float blue;
+  float mass;
+  float red_intensity;
+  float green_intensity;
+  float blue_intensity;
   std::string name;
 };
 
@@ -86,9 +87,9 @@ class GasParticle {
   float radius_;
   float mass_;
   // Colors to display between 0 and 1 (1 translates to 255 in decimal RGB)
-  float red_color_intensity_;
-  float green_color_intensity_;
-  float blue_color_intensity_;
+  float red_intensity_;
+  float green_intensity_;
+  float blue_intensity_;
 
   // The name assigned to this particle when deserializing it from json
   std::string particle_type_name_;
