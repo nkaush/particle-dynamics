@@ -5,6 +5,7 @@ namespace idealgas {
 using glm::vec2;
 using std::string;
 using std::vector;
+using std::map;
 
 const string SimulationEngine::kBaseFilePath =
     "/Users/neilkaushikkar/Cinder/my-projects/ideal-gas-nkaush/";
@@ -18,8 +19,16 @@ const string SimulationEngine::kJsonRandomSimulationFilePath = kBaseFilePath
 SimulationEngine::SimulationEngine(bool load_from_saved_file) :
       json_manager_(), container_(ContainerInitializer(load_from_saved_file)),
       histograms_({}) {
-  Histogram hist = Histogram("test", Histogram::kDefaultXCoordinate, 50, 0.5, 0.5, 0.5);
-  histograms_.push_back(hist);
+  vector<ParticleSpecs> particle_types = container_.FindUniqueParticleTypes();
+  float x_coordinate = Histogram::kDefaultXCoordinate;
+  float y_coordinate = 50;
+
+  for (const ParticleSpecs& specs : particle_types) {
+    histograms_.emplace_back(specs.name, x_coordinate, y_coordinate,
+                             specs.red_intensity, specs.green_intensity,
+                             specs.blue_intensity);
+    y_coordinate += Histogram::kDefaultGraphHeight + 50;
+  }
 }
 
 GasContainer SimulationEngine::ContainerInitializer(
@@ -38,16 +47,28 @@ void SimulationEngine::SaveSimulation() {
 
 void SimulationEngine::AdvanceToNextFrame() {
   container_.AdvanceOneFrame();
-  vector<float>().swap(velocities_);
+  UpdateHistograms();
+}
+
+void SimulationEngine::UpdateHistograms() {
+  map<string, vector<float>> particle_speeds;
+
   for (const GasParticle& particle : container_.GetAllParticles()) {
-    velocities_.push_back(glm::length(particle.GetVelocity()));
+    float speed = glm::length(particle.GetVelocity());
+    particle_speeds[particle.GetTypeName()].push_back(speed);
   }
-  histograms_[0].UpdateBinCounts(velocities_);
+
+  // Can't declare hist a const reference since we need to update internal state
+  for (Histogram& hist : histograms_) {
+    hist.UpdateBinCounts(particle_speeds.at(hist.GetDataLabel()));
+  }
 }
 
 void SimulationEngine::Render() {
   container_.Display();
-  histograms_[0].Draw();
+  for (const Histogram& hist : histograms_) {
+    hist.Draw();
+  }
 }
 
 }  // namespace idealgas

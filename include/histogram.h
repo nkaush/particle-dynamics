@@ -16,9 +16,11 @@ class Histogram {
 
   void UpdateGraph();
 
-  void Draw();
+  void Draw() const;
 
   void UpdateBinCounts(std::vector<float>& values);
+
+  std::string GetDataLabel() const;
 
   static constexpr float kBinCount = 20;
   static constexpr float kDefaultBinHeightIncrement = 5;

@@ -75,13 +75,18 @@ class GasContainer {
   void HandleMultiParticleInteractions();
 
   /**
-   * Calculates the velocity of a particle if it hits a wall, otherwise returns
-   * the particle's current velocity.
+   * Calculates the velocity of a particle depending on which walls the particle
+   * is moving towards and is touching or overlapping.
    * @param particle - the particle to calculate velocity for
+   * @param is_collision_at_vertical_wall - a bool indicating whether the
+   * particle has collided with a vertical wall
+   * @param is_collision_at_horizontal_wall - a bool indicating whether the
+   * particle has collided with a horizontal wall
    * @return a vec2 indicating the new velocity if a particle hit a wall
    */
   static glm::vec2 CalculateParticleVelocityAfterWallCollision(
-      const GasParticle& particle);
+      const GasParticle& particle, bool is_collision_at_vertical_wall,
+      bool is_collision_at_horizontal_wall);
 
   /**
    * Checks whether a particle is colliding with any walls parallel to those

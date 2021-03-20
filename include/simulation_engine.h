@@ -61,7 +61,7 @@ class SimulationEngine {
   GasContainer container_;
   std::vector<Histogram> histograms_;
 
-  std::vector<float> velocities_;
+  void UpdateHistograms();
 };
 
 }  // namespace idealgas
