@@ -31,7 +31,7 @@ class GasContainer {
    * @param type_counts - a size_t indicating the number of unique particle
    *                      types to track number of histograms
    */
-  GasContainer(const std::vector<GasParticle>& particles, size_t type_counts);
+  GasContainer(const std::vector<GasParticle>& particles);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -51,17 +51,16 @@ class GasContainer {
   std::vector<GasParticle> GetAllParticles() const;
 
   /**
-   * Getter for the number of particle types in the container.
-   * @return a size_t indicating the number of particle types
+   * Find each of the unique particle types by comparing all of the particles in
+   * this container for same mass, radius, and color (NOT velocity or position).
+   * @return a vector of ParticleSpecs indicating the mass, radius, and color
+   * intensity values of each unique particle in the container
    */
-  size_t GetParticleTypesCount() const;
+  std::vector<ParticleSpecs> FindUniqueParticleTypes() const;
 
  private:
   // stores the particles in the container
   std::vector<GasParticle> all_particles_;
-
-  // This variable tracks the number of types of particles (and histograms).
-  size_t particle_types_count_;
 
   /**
    * Handles the logic of all particle interactions with walls and adjusts
@@ -118,6 +117,17 @@ class GasContainer {
    */
   static glm::vec2 CalculateParticleVelocityAfterCollision(
       const GasParticle& particle_one, const GasParticle& particle_two);
+
+  /**
+   * Determines whether a particle's characteristics match those defined in the
+   * provided ParticleSpecs struct.
+   * @param particle_one - the 1st particle to compare
+   * @param particle_two - the 2nd particle to compare
+   * @return a bool indicating whether the particle's characteristics match the
+   * characteristics defined in the struct provided
+   */
+  bool DoesParticleHaveSpecifications(const GasParticle& particle_one,
+                                      const ParticleSpecs& specification) const;
 };
 
 }  // namespace idealgas

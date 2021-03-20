@@ -18,7 +18,7 @@ TEST_CASE("Testing Particle on Wall Collisions Parallel to Axes") {
     float wall_bound = GasContainer::kContainerUpperBound + radius;
     GasParticle particle_one = CreateParticle(400, wall_bound, 20, -0.1, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(20, 0.1)));
@@ -28,7 +28,7 @@ TEST_CASE("Testing Particle on Wall Collisions Parallel to Axes") {
     float wall_bound = GasContainer::kContainerLowerBound - radius;
     GasParticle particle_one = CreateParticle(400, wall_bound, 8, 0.1, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(8, -0.1)));
@@ -38,7 +38,7 @@ TEST_CASE("Testing Particle on Wall Collisions Parallel to Axes") {
     float wall_bound = GasContainer::kContainerLeftBound + radius;
     GasParticle particle_one = CreateParticle(wall_bound, 400, -27, 0, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(27, 0)));
@@ -48,7 +48,7 @@ TEST_CASE("Testing Particle on Wall Collisions Parallel to Axes") {
     float wall_bound = GasContainer::kContainerRightBound - radius;
     GasParticle particle_one = CreateParticle(wall_bound, 400, 12, 0, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(-12, 0)));
@@ -63,7 +63,7 @@ TEST_CASE("Testing Particle on Wall Collisions Diagonally Bounce Off Walls") {
     float wall_bound = GasContainer::kContainerUpperBound + radius;
     GasParticle particle_one = CreateParticle(400, wall_bound, -19, -8, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(-19, 8)));
@@ -73,7 +73,7 @@ TEST_CASE("Testing Particle on Wall Collisions Diagonally Bounce Off Walls") {
     float wall_bound = GasContainer::kContainerLowerBound - radius;
     GasParticle particle_one = CreateParticle(400, wall_bound, 12, 27, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(12, -27)));
@@ -83,7 +83,7 @@ TEST_CASE("Testing Particle on Wall Collisions Diagonally Bounce Off Walls") {
     float wall_bound = GasContainer::kContainerLeftBound + radius;
     GasParticle particle_one = CreateParticle(wall_bound, 400, -2, 1, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(2, 1)));
@@ -93,7 +93,7 @@ TEST_CASE("Testing Particle on Wall Collisions Diagonally Bounce Off Walls") {
     float wall_bound = GasContainer::kContainerRightBound - radius;
     GasParticle particle_one = CreateParticle(wall_bound, 400, 12, 12, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(-12, 12)));
@@ -110,7 +110,7 @@ TEST_CASE("Testing Particle on Wall Collisions in the Corners of Container") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, -2, -4, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(2, 4)));
@@ -122,7 +122,7 @@ TEST_CASE("Testing Particle on Wall Collisions in the Corners of Container") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, -8, 19, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(8, -19)));
@@ -134,7 +134,7 @@ TEST_CASE("Testing Particle on Wall Collisions in the Corners of Container") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, 19, -68, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(-19, 68)));
@@ -146,7 +146,7 @@ TEST_CASE("Testing Particle on Wall Collisions in the Corners of Container") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, 2, 8, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     REQUIRE(IsVelocityAccurate(container.GetAllParticles()[0], vec2(-2, -8)));
@@ -160,7 +160,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     float wall_bound = GasContainer::kContainerLeftBound;
     GasParticle particle_one = CreateParticle(wall_bound, 20, -0.1, 2, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =
@@ -179,7 +179,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     float wall_bound = GasContainer::kContainerRightBound;
     GasParticle particle_one = CreateParticle(wall_bound, 20, 0.1, 2, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =
@@ -198,7 +198,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     float wall_bound = GasContainer::kContainerUpperBound;
     GasParticle particle_one = CreateParticle(400, wall_bound, 10, -0.1, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =
@@ -217,7 +217,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     float wall_bound = GasContainer::kContainerLowerBound;
     GasParticle particle_one = CreateParticle(400, wall_bound, 8, 0.1, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =
@@ -238,7 +238,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, -0.19, 0.68, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =
@@ -259,7 +259,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, 0.8, 0.2, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =
@@ -280,7 +280,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, -0.12, -0.12, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =
@@ -301,7 +301,7 @@ TEST_CASE("Testing Particles Overlapping Walls on Collision") {
     GasParticle particle_one =
         CreateParticle(x_axis_bound, y_axis_bound, 0.12, -0.27, specs);
 
-    GasContainer container = GasContainer({particle_one}, 1);
+    GasContainer container = GasContainer({particle_one});
     container.AdvanceOneFrame();
 
     bool did_change_velocity =

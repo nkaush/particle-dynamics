@@ -48,7 +48,7 @@ GasContainer JsonManager::LoadContainerFromJson(
     gas_particles_vector.push_back(gas_particle);
   }
 
-  return GasContainer(gas_particles_vector, particle_types.size());
+  return GasContainer(gas_particles_vector);
 }
 
 GasParticle JsonManager::CreateSpecifiedParticle(
@@ -106,7 +106,7 @@ GasContainer JsonManager::GenerateRandomContainerFromJson(
     }
   }
 
-  return GasContainer(gas_particles_vector, particle_types.size());
+  return GasContainer(gas_particles_vector);
 }
 
 GasParticle JsonManager::GenerateRandomParticle(

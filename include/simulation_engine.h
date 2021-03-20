@@ -2,6 +2,7 @@
 // Created by Neil Kaushikkar on 3/15/21.
 //
 #include "json_manager.h"
+#include "histogram.h"
 
 #ifndef IDEAL_GAS_SIMULATION_ENGINE_H
 #define IDEAL_GAS_SIMULATION_ENGINE_H
@@ -58,6 +59,9 @@ class SimulationEngine {
 
   JsonManager json_manager_;
   GasContainer container_;
+  std::vector<Histogram> histograms_;
+
+  std::vector<float> velocities_;
 };
 
 }  // namespace idealgas

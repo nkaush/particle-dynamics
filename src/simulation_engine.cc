@@ -4,6 +4,7 @@ namespace idealgas {
 
 using glm::vec2;
 using std::string;
+using std::vector;
 
 const string SimulationEngine::kBaseFilePath =
     "/Users/neilkaushikkar/Cinder/my-projects/ideal-gas-nkaush/";
@@ -15,7 +16,11 @@ const string SimulationEngine::kJsonRandomSimulationFilePath = kBaseFilePath
     + "src/data/random_simulation_generator.json";
 
 SimulationEngine::SimulationEngine(bool load_from_saved_file) :
-      json_manager_(), container_(ContainerInitializer(load_from_saved_file)) {}
+      json_manager_(), container_(ContainerInitializer(load_from_saved_file)),
+      histograms_({}) {
+  Histogram hist = Histogram("test", Histogram::kDefaultXCoordinate, 50, 0.5, 0.5, 0.5);
+  histograms_.push_back(hist);
+}
 
 GasContainer SimulationEngine::ContainerInitializer(
     bool load_from_saved_file) const {
@@ -33,10 +38,16 @@ void SimulationEngine::SaveSimulation() {
 
 void SimulationEngine::AdvanceToNextFrame() {
   container_.AdvanceOneFrame();
+  vector<float>().swap(velocities_);
+  for (const GasParticle& particle : container_.GetAllParticles()) {
+    velocities_.push_back(glm::length(particle.GetVelocity()));
+  }
+  histograms_[0].UpdateBinCounts(velocities_);
 }
 
 void SimulationEngine::Render() {
   container_.Display();
+  histograms_[0].Draw();
 }
 
 }  // namespace idealgas

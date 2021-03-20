@@ -21,7 +21,7 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 0.1, 0, specs);
     GasParticle particle_two = CreateParticle(351.4, 351.4, -0.1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -36,7 +36,7 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
     GasParticle particle_two = CreateParticle(352, 350, -1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -51,7 +51,7 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 0, 1, specs);
     GasParticle particle_two = CreateParticle(350, 352, 0, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -66,7 +66,7 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
     GasParticle particle_two = CreateParticle(350, 352, 0, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -81,7 +81,7 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 3, 0, specs);
     GasParticle particle_two = CreateParticle(352, 350, 1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -96,7 +96,7 @@ TEST_CASE("Testing Touching Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 1, -1, specs);
     GasParticle particle_two = CreateParticle(352, 350, -1, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -115,7 +115,7 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 0, 0.1, specs);
     GasParticle particle_two = CreateParticle(350, 351, 0, -0.1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -145,7 +145,7 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 0.1, 0, specs);
     GasParticle particle_two = CreateParticle(351, 350, -0.1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -175,7 +175,7 @@ TEST_CASE("Testing Overlapping Particle on Particle Collisions") {
     GasParticle particle_one = CreateParticle(350, 350, 0.1, 0, specs);
     GasParticle particle_two = CreateParticle(350.7, 350.7, -0.1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -209,7 +209,7 @@ TEST_CASE("Particles Are Not Colliding") {
     GasParticle particle_one = CreateParticle(350, 350, 0, 1, specs);
     GasParticle particle_two = CreateParticle(350, 300, 0, -1, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -224,7 +224,7 @@ TEST_CASE("Particles Are Not Colliding") {
     GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
     GasParticle particle_two = CreateParticle(350, 351, -1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =
@@ -239,7 +239,7 @@ TEST_CASE("Particles Are Not Colliding") {
     GasParticle particle_one = CreateParticle(350, 350, 1, 0, specs);
     GasParticle particle_two = CreateParticle(350, 351, 1, 0, specs);
 
-    GasContainer container = GasContainer({particle_one, particle_two}, 1);
+    GasContainer container = GasContainer({particle_one, particle_two});
     container.AdvanceOneFrame();
 
     vec2 velocity_one_accuracy =

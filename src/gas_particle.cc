@@ -27,6 +27,15 @@ void GasParticle::UpdatePosition() {
   position_ += velocity_;
 }
 
+void GasParticle::DrawParticle() const {
+  ci::gl::color(ci::Color(red_intensity_, green_intensity_, blue_intensity_));
+  ci::gl::drawSolidCircle(position_, radius_);
+}
+
+void GasParticle::SetVelocity(const glm::vec2& new_velocity) {
+  velocity_ = new_velocity;
+}
+
 glm::vec2 GasParticle::GetVelocity() const {
   return velocity_;
 }
@@ -59,13 +68,9 @@ string GasParticle::GetTypeName() const {
     return particle_type_name_;
 }
 
-void GasParticle::DrawParticle() const {
-  ci::gl::color(ci::Color(red_intensity_, green_intensity_, blue_intensity_));
-  ci::gl::drawSolidCircle(position_, radius_);
-}
-
-void GasParticle::SetVelocity(const glm::vec2& new_velocity) {
-  velocity_ = new_velocity;
+ParticleSpecs GasParticle::GetParticleTypeDetails() const {
+  return {radius_, mass_, red_intensity_, green_intensity_,
+          blue_intensity_, particle_type_name_};
 }
 
 } // namespace idealgas

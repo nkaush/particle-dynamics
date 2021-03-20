@@ -49,16 +49,18 @@ class GasParticle {
               const std::string& name);
 
   /**
+   * Draws this particle based on the particle's current position in the color
+   * that is defined by the floats defining red, green, and blue intensity.
+   */
+  void DrawParticle() const;
+
+  /**
    * Increment's this particle's position after 1 unit of time using the
    * particle's current velocity vec2.
    */
   void UpdatePosition();
 
-  /**
-   * Draws this particle based on the particle's current position in the color
-   * that is defined by the floats defining red, green, and blue intensity.
-   */
-  void DrawParticle() const;
+  void SetVelocity(const glm::vec2& new_velocity);
 
   glm::vec2 GetVelocity() const;
 
@@ -76,7 +78,7 @@ class GasParticle {
 
   std::string GetTypeName() const;
 
-  void SetVelocity(const glm::vec2& new_velocity);
+  ParticleSpecs GetParticleTypeDetails() const;
 
  private:
   // The particle's current location
