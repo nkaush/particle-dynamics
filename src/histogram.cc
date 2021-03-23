@@ -7,20 +7,17 @@ using std::vector;
 using std::string;
 using glm::vec2;
 
+// Define the non literal static variables
 const char* Histogram::kGraphBoundColor = "white";
-
 const string Histogram::kXAxisLabelStart = "Speed (pixels/frame) for \"";
-
 const string Histogram::kXAxisLabelEnd = "\" Particles";
+const string Histogram::kYAxisLabel = "Frequency";
 
-const string Histogram::kYAxisLabel =
-    "Frequency";
-
-Histogram::Histogram(const string& label, float single_bin_range,
+Histogram::Histogram(const string& label, size_t num_bins, float single_bin_range,
                      float top_left_x, float top_left_y,
-                     float red, float green, float blue) :
+                     float red, float green, float blue, float min_value) :
       data_label_(label), red_intensity_(red), green_intensity_(green),
-      blue_intensity_(blue), bin_values_(),
+      blue_intensity_(blue), bin_values_(), minimum_value_(min_value),
       single_bin_range_span_(single_bin_range),
       bin_display_height_increment_(kDefaultBinHeightIncrement),
       upper_left_x_coordinate_(top_left_x),
@@ -30,6 +27,8 @@ Histogram::Histogram(const string& label, float single_bin_range,
 
   if (single_bin_range <= 0) {
     throw std::invalid_argument("Bin range must be greater than 0.");
+  } else if (num_bins <= 0) {
+    throw std::invalid_argument("The number of bins must be at least 1.");
   }
 
   lower_right_x_coordinate_ = upper_left_x_coordinate_
@@ -37,8 +36,8 @@ Histogram::Histogram(const string& label, float single_bin_range,
   lower_right_y_coordinate_ = upper_left_y_coordinate_
                               + graph_bounding_box_height_;
 
-  bin_display_width_ = graph_bounding_box_width_ / kBinCount;
-  vector<size_t>(kBinCount, 0).swap(bin_values_);
+  bin_display_width_ = graph_bounding_box_width_ / num_bins;
+  vector<size_t>(num_bins, 0).swap(bin_values_);
 }
 
 std::string Histogram::GetDataLabel() const {
@@ -49,6 +48,32 @@ std::vector<size_t> Histogram::GetBinValues() const {
   return bin_values_;
 }
 
+void Histogram::UpdateBinDistribution(const std::vector<float>& updated_values) {
+  // make a shallow copy of all values in the vector so we can sort it in place
+  vector<float> sorted_values;
+  sorted_values.assign(updated_values.begin(), updated_values.end());
+
+  // sort values first so we only go through bins and values once sequentially
+  std::sort(sorted_values.begin(), sorted_values.end(), std::less<float>());
+
+  // reset the bin counts to 0, so we can fill it up again
+  vector<size_t>(bin_values_.size(), 0).swap(bin_values_);
+
+  size_t value_idx = 0;
+
+  // Go through each bin in the histogram...
+  for (size_t bin_idx = 0; bin_idx < bin_values_.size(); bin_idx++) {
+    // The 0th bin ends at value <single_bin_range_span_>, so add 1 to get end
+    while (value_idx < sorted_values.size() &&
+           sorted_values[value_idx] <= (bin_idx + 1) * single_bin_range_span_) {
+      // ...and update bin as long as there is a value small enough to fit in it
+      if (sorted_values[value_idx] >= minimum_value_) {
+        bin_values_[bin_idx]++;
+      }
+      value_idx++;
+    }
+  }
+}
 
 void Histogram::Draw() const {
   DrawBins();
@@ -84,18 +109,19 @@ void Histogram::DrawBins() const {
 void Histogram::DrawXAxisTicksAndLabels() const {
   ci::gl::color(ci::Color(kGraphBoundColor));
 
-  for (size_t bin_idx = 0; bin_idx <= kBinCount; bin_idx++) {
+  for (size_t bin_idx = 0; bin_idx <= bin_values_.size(); bin_idx++) {
     float distance_from_origin =
         upper_left_x_coordinate_ + (bin_idx * bin_display_width_);
 
-    vec2 starting_point = vec2(distance_from_origin, lower_right_y_coordinate_);
-    vec2 ending_point =
-        vec2(distance_from_origin, lower_right_y_coordinate_ + kAxisTickLength);
+    // Calculate the coordinates of the tick start/ends
+    vec2 starting_point(distance_from_origin, lower_right_y_coordinate_);
+    vec2 ending_point
+        (distance_from_origin, lower_right_y_coordinate_ + kAxisTickLength);
 
     ci::gl::drawLine(starting_point, ending_point);
 
+    // Only label the tick if it is a multiple of the increment specified
     if (bin_idx % kXAxisTickDisplayIncrement == 0) {
-      // Adapted from https://stackoverflow.com/a/10510139
       std::stringstream formatted_tick_label;
       formatted_tick_label << (bin_idx * single_bin_range_span_);
 
@@ -116,14 +142,15 @@ void Histogram::DrawYAxisTicksAndLabels() const {
     float distance_from_origin =
         lower_right_y_coordinate_ - (bin_idx * bin_display_height_increment_);
 
-    vec2 starting_point = vec2(upper_left_x_coordinate_, distance_from_origin);
-    vec2 ending_point =
-        vec2(upper_left_x_coordinate_ - kAxisTickLength, distance_from_origin);
+    // Calculate the coordinates of the tick start/ends
+    vec2 starting_point(upper_left_x_coordinate_, distance_from_origin);
+    vec2 ending_point
+        (upper_left_x_coordinate_ - kAxisTickLength, distance_from_origin);
 
     ci::gl::drawLine(starting_point, ending_point);
 
+    // Only label the tick if it is a multiple of the increment specified
     if (bin_idx % kYAxisTickDisplayIncrement == 0) {
-      // Adapted from https://stackoverflow.com/a/10510139
       std::stringstream formatted_tick_label;
       formatted_tick_label << bin_idx;
 
@@ -149,30 +176,6 @@ void Histogram::DrawAxisLabels() const {
     vec2(kYAxisLabelHorizontalPadding - lower_right_y_coordinate_,
          lower_right_x_coordinate_ - kYAxisLabelVerticalPadding));
   ci::gl::rotate(kYAxisLabelRotation); // un-rotate to preserve other drawings
-}
-
-void Histogram::UpdateBinValues(const std::vector<float>& updated_values) {
-  // make a shallow copy of all values in the vector so we can sort it in place
-  vector<float> sorted_values;
-  sorted_values.assign(updated_values.begin(), updated_values.end());
-
-  // sort values first to achieve O(n log n) instead of O(n^2) runtime
-  std::sort(sorted_values.begin(), sorted_values.end(), std::less<float>());
-
-  vector<size_t>(kBinCount, 0).swap(bin_values_);
-
-  size_t value_idx = 0;
-
-  // Go through each bin in the histogram...
-  for (size_t bin_idx = 0; bin_idx < bin_values_.size(); bin_idx++) {
-    // The 0th bin ends at value <single_bin_range_span_>, so add 1 to get end
-    while (value_idx < sorted_values.size() &&
-           sorted_values[value_idx] <= (bin_idx + 1) * single_bin_range_span_) {
-      // ...and update bin as long as there is a value small enough to fit in it
-      bin_values_[bin_idx]++;
-      value_idx++;
-    }
-  }
 }
 
 } // namespace idealgas

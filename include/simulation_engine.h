@@ -58,11 +58,16 @@ class SimulationEngine {
   static const std::string kBaseFilePath;
 
   static constexpr float kHistogramDisplayPadding = 50;
+  static constexpr float kDefaultHistogramXCoordinate = 50;
 
   JsonManager json_manager_;
   GasContainer container_;
   std::vector<Histogram> histograms_;
 
+  /**
+   * Updates the histograms in the frame by passing the updated velocities
+   * from the GasContainer to each particle's corresponding histogram.
+   */
   void UpdateHistograms();
 };
 

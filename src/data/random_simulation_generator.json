@@ -25,7 +25,7 @@
   "particle_counts": [
     {
       "type": "oxygen",
-      "count": 40,
+      "count": 50,
       "max_velocity": 2
     },
     {
@@ -35,7 +35,7 @@
     },
     {
       "type": "carbon",
-      "count": 40,
+      "count": 50,
       "max_velocity": 2
     }
   ]

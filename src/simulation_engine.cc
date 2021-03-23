@@ -21,14 +21,15 @@ SimulationEngine::SimulationEngine(bool load_from_saved_file) :
       histograms_({}) {
   vector<ParticleSpecs> particle_types = container_.FindUniqueParticleTypes();
 
-  float x_coordinate = Histogram::kDefaultXCoordinate;
+  float x_coordinate = kDefaultHistogramXCoordinate;
   float y_coordinate = kHistogramDisplayPadding;
   float bin_range = Histogram::kDefaultSingleBinRange;
+  size_t bin_count = Histogram::kDefaultBinCount;
 
   for (const ParticleSpecs& specs : particle_types) {
-    histograms_.emplace_back(specs.name, bin_range, x_coordinate, y_coordinate,
-                             specs.red_intensity, specs.green_intensity,
-                             specs.blue_intensity);
+    histograms_.emplace_back(specs.name, bin_count, bin_range,
+                             x_coordinate, y_coordinate, specs.red_intensity,
+                             specs.green_intensity, specs.blue_intensity);
     y_coordinate += Histogram::kDefaultGraphHeight + kHistogramDisplayPadding;
   }
 }
@@ -62,7 +63,7 @@ void SimulationEngine::UpdateHistograms() {
 
   // Can't declare hist a const reference since we need to update internal state
   for (Histogram& hist : histograms_) {
-    hist.UpdateBinValues(particle_speeds.at(hist.GetDataLabel()));
+    hist.UpdateBinDistribution(particle_speeds.at(hist.GetDataLabel()));
   }
 }
 

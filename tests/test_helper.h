@@ -45,7 +45,6 @@ bool AreResultsAccurate(const glm::vec2& vector_one,
  */
 bool IsVelocityAccurate(const idealgas::GasParticle& particle,
                         const glm::vec2& expected_elocity);
-
 } // namespace idealgas_test
 
 #endif  // TEST_HELPER_CC
