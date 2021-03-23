@@ -28,10 +28,16 @@ class IdealGasApp : public ci::app::App {
    */
   void update() override;
 
+  /**
+   * Detect key press events and route to relevant functions to perform action.
+   * @param event - the KeyEvent triggered by a physical key press
+   */
   void keyDown(cinder::app::KeyEvent event) override;
 
   // Define the size of the window to display the simulation
-  const int kWindowSize = 750;
+  static constexpr int kWindowWidth = 750;
+  static constexpr int kWindowHeight = 500;
+
   const int kMargin = 100;
 
   static constexpr char kSaveToJsonKey = 's';

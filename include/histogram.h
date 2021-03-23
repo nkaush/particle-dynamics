@@ -17,11 +17,11 @@ class Histogram {
 
   void Draw() const;
 
-  void DrawBins(float lower_right_y_coordinate) const;
+  void DrawBins() const;
 
-  void DrawXAxisTicks(float lower_right_y_coord) const;
+  void DrawXAxisTicksAndLabels() const;
 
-  void DrawYAxisTicks() const;
+  void DrawYAxisTicksAndLabels() const;
 
   void DrawAxisLabels() const;
 
@@ -31,17 +31,14 @@ class Histogram {
 
   std::vector<size_t> GetBinValues() const;
 
-  static constexpr float kBinCount = 20;
   static constexpr float kDefaultSingleBinRange = 0.5;
 
-  static constexpr float kDefaultBinHeightIncrement = 5;
-  static constexpr float kAxisTickLength = 5;
-
   static constexpr float kDefaultXCoordinate = 50;
-  static constexpr float kDefaultGraphWidth = 200;
-  static constexpr float kDefaultGraphHeight = 100;
 
-private:
+  static constexpr float kDefaultGraphHeight = 100;
+  static constexpr float kDefaultGraphWidth = 200;
+
+ private:
   std::string data_label_;
   float red_intensity_;
   float green_intensity_;
@@ -59,13 +56,34 @@ private:
 
   float upper_left_x_coordinate_;
   float upper_left_y_coordinate_;
+  float lower_right_x_coordinate_;
+  float lower_right_y_coordinate_;
 
   float graph_bounding_box_width_;
   float graph_bounding_box_height_;
 
   static const char* kGraphBoundColor;
+
+  static const std::string kXAxisLabelStart;
+  static const std::string kXAxisLabelEnd;
+  static constexpr float kXAxisLabelPadding = 25;
+
+  static const std::string kYAxisLabel;
+  static constexpr float kYAxisLabelRotation = M_PI / 2;
+  static constexpr float kYAxisLabelHorizontalPadding = 50;
+  static constexpr float kYAxisLabelVerticalPadding = 230;
+
+  static constexpr float kAxisTickLength = 5;
+  static constexpr float kAxisTickLabelPadding = 10;
+
+  static constexpr size_t kXAxisTickDisplayIncrement = 2;
+  static constexpr size_t kYAxisTickDisplayIncrement = 5;
+
+  static constexpr float kBinCount = 20;
+  static constexpr float kDefaultBinHeightIncrement = 5;
+  // Determines how often to print the tick label - 2 means every other tick
 };
 
-}
+} // namespace idealgas
 
 #endif  // IDEAL_GAS_HISTOGRAM_H

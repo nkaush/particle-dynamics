@@ -5,7 +5,7 @@ namespace idealgas {
 using cinder::app::KeyEvent;
 
 IdealGasApp::IdealGasApp() : engine_(SimulationEngine(false)) {
-  ci::app::setWindowSize(kWindowSize, kWindowSize);
+  ci::app::setWindowSize(kWindowWidth, kWindowHeight);
 }
 
 void IdealGasApp::draw() {
