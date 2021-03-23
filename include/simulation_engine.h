@@ -57,6 +57,8 @@ class SimulationEngine {
   // The full directory path to this project
   static const std::string kBaseFilePath;
 
+  static constexpr float kHistogramDisplayPadding = 50;
+
   JsonManager json_manager_;
   GasContainer container_;
   std::vector<Histogram> histograms_;

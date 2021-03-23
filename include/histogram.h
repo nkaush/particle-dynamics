@@ -5,30 +5,41 @@
 #ifndef IDEAL_GAS_HISTOGRAM_H
 #define IDEAL_GAS_HISTOGRAM_H
 
-#include "gas_particle.h"
+#include <string>
+#include <vector>
 
 namespace idealgas {
 
 class Histogram {
  public:
-  Histogram(const std::string& label, float top_left_x, float top_left_y,
-            float red, float green, float blue);
-
-  void UpdateGraph();
+  Histogram(const std::string& label, float single_bin_range, float top_left_x,
+            float top_left_y, float red, float green, float blue);
 
   void Draw() const;
 
-  void UpdateBinCounts(std::vector<float>& values);
+  void DrawBins(float lower_right_y_coordinate) const;
+
+  void DrawXAxisTicks(float lower_right_y_coord) const;
+
+  void DrawYAxisTicks() const;
+
+  void DrawAxisLabels() const;
+
+  void UpdateBinValues(const std::vector<float>& updated_values);
 
   std::string GetDataLabel() const;
 
+  std::vector<size_t> GetBinValues() const;
+
   static constexpr float kBinCount = 20;
+  static constexpr float kDefaultSingleBinRange = 0.5;
+
   static constexpr float kDefaultBinHeightIncrement = 5;
+  static constexpr float kAxisTickLength = 5;
 
   static constexpr float kDefaultXCoordinate = 50;
   static constexpr float kDefaultGraphWidth = 200;
   static constexpr float kDefaultGraphHeight = 100;
-
 
 private:
   std::string data_label_;
@@ -37,9 +48,9 @@ private:
   float blue_intensity_;
 
   // the number of values assigned to each bin
-  std::vector<size_t> bin_counts_;
+  std::vector<size_t> bin_values_;
   // the range of values that belong to the bin
-  float bin_range_span_;
+  float single_bin_range_span_;
 
   // how wide to display the bin as
   float bin_display_width_;

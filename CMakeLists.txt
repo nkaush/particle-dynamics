@@ -75,6 +75,7 @@ list(APPEND TEST_FILES tests/test_gas_particle.cc
                        tests/test_gas_container_multi_particle_collisions.cc
                        tests/test_gas_container_particle_wall_collisions.cc
                        tests/test_json_manager.cc
+                       tests/test_histogram.cc
                        tests/test_helper.cc)
 
 ci_make_app(

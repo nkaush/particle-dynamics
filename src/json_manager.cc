@@ -193,7 +193,7 @@ void JsonManager::WriteContainerToJson(const GasContainer& container,
 }
 
 json JsonManager::SerializeParticle(const GasParticle& particle,
-                                         json& particle_types) const {
+                                    json& particle_types) const {
   json serialized_particle;
   string type_name = particle.GetTypeName();
   serialized_particle[kJsonSchemaTypeKey] = type_name;

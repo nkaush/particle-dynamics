@@ -38,16 +38,15 @@ void GasContainer::AdvanceOneFrame() {
 
 void GasContainer::HandleParticleWallInteractions() {
   for (GasParticle& particle : all_particles_) {
-    bool is_colliding_at_vertical_walls = IsParticleCollidingWithWallsOnAxis(
+    bool is_colliding_at_vertical_walls = IsParticleCollidingWithAnyWallsOnAxis(
         particle, kXAxis, kContainerLeftBound, kContainerRightBound);
 
-    bool is_colliding_at_horizontal_walls = IsParticleCollidingWithWallsOnAxis(
-        particle, kYAxis, kContainerUpperBound, kContainerLowerBound);
+    bool is_colliding_at_horizontal_walls =
+        IsParticleCollidingWithAnyWallsOnAxis(particle, kYAxis,
+          kContainerUpperBound, kContainerLowerBound);
 
-    if (is_colliding_at_vertical_walls || is_colliding_at_horizontal_walls) {
-      particle.SetVelocity(CalculateParticleVelocityAfterWallCollision(particle,
-          is_colliding_at_vertical_walls, is_colliding_at_horizontal_walls));
-    }
+    particle.SetVelocity(CalculateParticleVelocityAfterWallCollision(particle,
+      is_colliding_at_vertical_walls, is_colliding_at_horizontal_walls));
   }
 }
 
@@ -71,7 +70,7 @@ vec2 GasContainer::CalculateParticleVelocityAfterWallCollision(
   return new_velocity;
 }
 
-bool GasContainer::IsParticleCollidingWithWallsOnAxis(
+bool GasContainer::IsParticleCollidingWithAnyWallsOnAxis(
     const GasParticle& particle, size_t axis_index,
     float min_wall_bound, float max_wall_bound) {
   // Check if particle is at or past the specified bounds

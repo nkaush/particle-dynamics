@@ -100,7 +100,7 @@ class GasContainer {
    * @return a bool indicating whether the given particle is colliding with the
    * given walls
    */
-  static bool IsParticleCollidingWithWallsOnAxis(
+  static bool IsParticleCollidingWithAnyWallsOnAxis(
       const GasParticle& particle, size_t axis_idx,
       float min_wall_bound, float max_wall_bound);
 
@@ -126,8 +126,8 @@ class GasContainer {
   /**
    * Determines whether a particle's characteristics match those defined in the
    * provided ParticleSpecs struct.
-   * @param particle_one - the 1st particle to compare
-   * @param particle_two - the 2nd particle to compare
+   * @param particle_one - the particle to check for certain characteristics
+   * @param specification - the particle characteristics to check for
    * @return a bool indicating whether the particle's characteristics match the
    * characteristics defined in the struct provided
    */
