@@ -72,7 +72,8 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/data/random_simulation_generator.json)
 
 list(APPEND TEST_FILES tests/test_gas_particle.cc
-                       tests/test_gas_container_multi_particle_collisions.cc
+        tests/test_gas_container_different_mass_particle_collisions.cc
+        tests/test_gas_container_same_mass_particle_collisions.cc
                        tests/test_gas_container_particle_wall_collisions.cc
                        tests/test_json_manager.cc
                        tests/test_histogram.cc

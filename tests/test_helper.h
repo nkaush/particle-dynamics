@@ -40,11 +40,11 @@ bool AreResultsAccurate(const glm::vec2& vector_one,
 /**
  * Determines whether the velocity of a particle is within acceptible margins
  * @param particle - the particle whose velocity we need to check
- * @param velocity - the expected velocity of the particle
+ * @param expected_velocity - the expected velocity of the particle
  * @return a bool indicating whether the velocity is within the margin of error
  */
 bool IsVelocityAccurate(const idealgas::GasParticle& particle,
-                        const glm::vec2& expected_elocity);
+                        const glm::vec2& expected_velocity);
 } // namespace idealgas_test
 
 #endif  // TEST_HELPER_CC

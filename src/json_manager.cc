@@ -157,6 +157,7 @@ void JsonManager::ValidateRandomGenerationJson(const json& to_validate) {
     try {
       particle_def.at(kJsonSchemaRedKey);
       particle_def.at(kJsonSchemaRadiusKey);
+      particle_def.at(kJsonSchemaMassKey);
       particle_def.at(kJsonSchemaGreenKey);
       particle_def.at(kJsonSchemaBlueKey);
     } catch (json::out_of_range& e) {
