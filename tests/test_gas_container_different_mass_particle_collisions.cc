@@ -10,7 +10,6 @@ using idealgas::GasContainer;
 using idealgas::ParticleSpecs;
 
 using idealgas_test::CreateParticle;
-using idealgas_test::AreResultsAccurate;
 using idealgas_test::IsVelocityAccurate;
 
 using glm::vec2;
@@ -146,87 +145,112 @@ TEST_CASE("Testing Combinations of Particle Masses and Speeds") {
 }
 
 TEST_CASE("Testing Multi-Particles With Different Mass Collisions") {
-  ParticleSpecs specs = {1, 1, 255, 255, 255, "test"};
+  ParticleSpecs specs_one = {1, 1, 255, 255, 255, "test"};
+  ParticleSpecs specs_two = {1, 2, 255, 255, 255, "test"};
+  ParticleSpecs specs_three = {1, 3, 255, 255, 255, "test"};
 
-  SECTION("Particles collide with third stationary particle on two axes") {
+  SECTION("Heavy particles collide with third light stationary particle") {
     vector<GasParticle> particles;
-    particles.push_back(CreateParticle(350, 350, 0, 0, specs));
-    particles.push_back(CreateParticle(348, 350, 1, 0, specs));
-    particles.push_back(CreateParticle(350, 352, 0, -1, specs));
-
-    GasContainer container = GasContainer(particles);
-    container.AdvanceOneFrame();
-    particles = container.GetAllParticles();
-
-    bool are_results_accurate = IsVelocityAccurate(particles.at(0), vec2(1, -1));
-    are_results_accurate &= IsVelocityAccurate(particles.at(1), vec2(0, 0));
-    are_results_accurate &= IsVelocityAccurate(particles.at(2), vec2(0, 0));
-
-    REQUIRE(are_results_accurate);
-  }
-
-  SECTION("Particles all converge at common point") {
-    vector<GasParticle> particles;
-    particles.push_back(CreateParticle(350, 350, -1, -1, specs));
-    particles.push_back(CreateParticle(348, 350, 1, -1, specs));
-    particles.push_back(CreateParticle(349, 348.6, 0, 1.4, specs));
+    particles.push_back(CreateParticle(350, 350, 0, 0, specs_one));
+    particles.push_back(CreateParticle(348, 350, 1, 0, specs_two));
+    particles.push_back(CreateParticle(350, 352, 0, -1, specs_three));
 
     GasContainer container = GasContainer(particles);
     container.AdvanceOneFrame();
     particles = container.GetAllParticles();
 
     bool are_results_accurate =
-        IsVelocityAccurate(particles.at(0), vec2(1.797298, 0.11621));
+        IsVelocityAccurate(particles.at(0), vec2(1.33333, -1.5));
     are_results_accurate &=
-        IsVelocityAccurate(particles.at(1), vec2(-1.538717, -0.245799));
-    are_results_accurate &=
-        IsVelocityAccurate(particles.at(2), vec2(-0.25858, -0.4704119));
+        IsVelocityAccurate(particles.at(1), vec2(0.33333, 0));
+    are_results_accurate &= IsVelocityAccurate(particles.at(2), vec2(0, -0.5));
 
     REQUIRE(are_results_accurate);
   }
 
-  SECTION("Particles collide like in Newton's cradle") {
+  SECTION("Light particles collide with third heavy stationary particle") {
     vector<GasParticle> particles;
-    particles.push_back(CreateParticle(350, 350, 1, 0, specs));
-    particles.push_back(CreateParticle(352, 350, 0, 0, specs));
-    particles.push_back(CreateParticle(354, 350, 0, 0, specs));
-    particles.push_back(CreateParticle(356, 350, 0, 0, specs));
-    particles.push_back(CreateParticle(358, 350, 0, 0, specs));
+    particles.push_back(CreateParticle(350, 350, 0, 0, specs_three));
+    particles.push_back(CreateParticle(348, 350, 1, 0, specs_one));
+    particles.push_back(CreateParticle(350, 352, 0, -1, specs_one));
+
+    GasContainer container = GasContainer(particles);
+    container.AdvanceOneFrame();
+    particles = container.GetAllParticles();
+
+    bool are_results_accurate =
+        IsVelocityAccurate(particles.at(0), vec2(0.5, -0.5));
+    are_results_accurate &=
+        IsVelocityAccurate(particles.at(1), vec2(-0.5, 0));
+    are_results_accurate &= IsVelocityAccurate(particles.at(2), vec2(0, 0.5));
+
+    REQUIRE(are_results_accurate);
+  }
+
+  SECTION("Particles of varying mass all converge at common point") {
+    vector<GasParticle> particles;
+    particles.push_back(CreateParticle(350, 350, -1, -1, specs_one));
+    particles.push_back(CreateParticle(348, 350, 1, -1, specs_two));
+    particles.push_back(CreateParticle(349, 348.6, 0, 1.4, specs_three));
+
+    GasContainer container = GasContainer(particles);
+    container.AdvanceOneFrame();
+    particles = container.GetAllParticles();
+
+    bool are_results_accurate =
+        IsVelocityAccurate(particles.at(0), vec2(2.524772, 0.201343));
+    are_results_accurate &=
+        IsVelocityAccurate(particles.at(1), vec2(-1.449041, 0.561984));
+    are_results_accurate &=
+        IsVelocityAccurate(particles.at(2), vec2(0.4577698, -0.04177));
+
+    REQUIRE(are_results_accurate);
+  }
+
+  SECTION("Particle collision chain with lighter particles in edges") {
+    vector<GasParticle> particles;
+    particles.push_back(CreateParticle(350, 350, 1, 0, specs_one));
+    particles.push_back(CreateParticle(352, 350, 0, 0, specs_three));
+    particles.push_back(CreateParticle(354, 350, 0, 0, specs_three));
+    particles.push_back(CreateParticle(356, 350, 0, 0, specs_three));
+    particles.push_back(CreateParticle(358, 350, 0, 0, specs_one));
 
     GasContainer container = GasContainer(particles);
     container.AdvanceOneFrame();
 
     bool are_results_accurate = true;
     particles = container.GetAllParticles();
+    vector<vec2> expected = {vec2(-0.5, 0), vec2(0, 0), vec2(0, 0),
+                             vec2(0.25, 0), vec2(0.75, 0)};
 
-    for (size_t i = 0; i < particles.size() - 1; i++) {
-      are_results_accurate &= IsVelocityAccurate(particles.at(i), vec2(0, 0));
+    for (size_t i = 0; i < particles.size(); i++) {
+      are_results_accurate &=
+          IsVelocityAccurate(particles.at(i), expected.at(i));
     }
-
-    are_results_accurate &= IsVelocityAccurate(particles.at(4), vec2(1, 0));
 
     REQUIRE(are_results_accurate);
   }
 
-  SECTION("Particles collide like in Newton's cradle") {
+  SECTION("Particle collision chain with heavier particles in edges") {
     vector<GasParticle> particles;
-    particles.push_back(CreateParticle(350, 350, 1, 0, specs));
-    particles.push_back(CreateParticle(352, 350, 0, 0, specs));
-    particles.push_back(CreateParticle(354, 350, 0, 0, specs));
-    particles.push_back(CreateParticle(356, 350, 0, 0, specs));
-    particles.push_back(CreateParticle(358, 350, 0, 0, specs));
+    particles.push_back(CreateParticle(350, 350, 1, 0, specs_three));
+    particles.push_back(CreateParticle(352, 350, 0, 0, specs_one));
+    particles.push_back(CreateParticle(354, 350, 0, 0, specs_one));
+    particles.push_back(CreateParticle(356, 350, 0, 0, specs_one));
+    particles.push_back(CreateParticle(358, 350, 0, 0, specs_three));
 
     GasContainer container = GasContainer(particles);
     container.AdvanceOneFrame();
 
     bool are_results_accurate = true;
     particles = container.GetAllParticles();
+    vector<vec2> expected = {vec2(0.5, 0), vec2(0, 0), vec2(0, 0),
+                             vec2(-0.75, 0), vec2(0.75, 0)};
 
-    for (size_t i = 0; i < particles.size() - 1; i++) {
-      are_results_accurate &= IsVelocityAccurate(particles.at(i), vec2(0, 0));
+    for (size_t i = 0; i < particles.size(); i++) {
+      are_results_accurate &=
+          IsVelocityAccurate(particles.at(i), expected.at(i));
     }
-
-    are_results_accurate &= IsVelocityAccurate(particles.at(4), vec2(1, 0));
 
     REQUIRE(are_results_accurate);
   }
