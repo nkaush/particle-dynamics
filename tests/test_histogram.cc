@@ -23,7 +23,7 @@ TEST_CASE("Test Constructor And Exception Throwing For Invalid Parameters") {
 }
 
 TEST_CASE("Testing Histogram Bin Limits and Edges") {
-  size_t bin_count = Histogram::kDefaultBinCount;
+  size_t bin_count = 20;
 
   SECTION("Empty vector provided yields empty histogram") {
     Histogram hist = Histogram("data", bin_count, 0.5, 0, 0, 0, 0, 0);
@@ -82,7 +82,7 @@ TEST_CASE("Testing Histogram Bin Limits and Edges") {
 }
 
 TEST_CASE("Testing Bin Updating for Sorted Vectors") {
-  size_t bin_count = Histogram::kDefaultBinCount;
+  size_t bin_count = 20;
 
   SECTION("Sorted values are placed into multiple bins") {
     Histogram hist = Histogram("data", bin_count, 1, 0, 0, 0, 0, 0);
@@ -151,7 +151,7 @@ TEST_CASE("Testing Bin Updating for Sorted Vectors") {
 }
 
 TEST_CASE("Testing Bin Updating for Unsorted Vectors") {
-  size_t bin_count = Histogram::kDefaultBinCount;
+  size_t bin_count = 20;
 
   SECTION("Unsorted values are placed into multiple bins") {
     Histogram hist = Histogram("data", bin_count, 1, 0, 0, 0, 0, 0);

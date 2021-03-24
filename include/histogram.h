@@ -46,7 +46,7 @@ class Histogram {
   std::vector<size_t> GetBinValues() const;
 
   static constexpr float kDefaultSingleBinRange = 0.5;
-  static constexpr float kDefaultBinCount = 20;
+  static constexpr float kDefaultBinCount = 14;
 
   static constexpr float kDefaultGraphHeight = 100;
   static constexpr float kDefaultGraphWidth = 200;

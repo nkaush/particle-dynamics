@@ -92,10 +92,17 @@ void Histogram::Draw() const {
 void Histogram::DrawBins() const {
   ci::gl::color(ci::Color(red_intensity_, green_intensity_, blue_intensity_));
   for (size_t bin_idx = 0; bin_idx < bin_values_.size(); bin_idx++) {
+    // find the location on the axis to draw the bin
     float distance_from_origin =
         upper_left_x_coordinate_ + (bin_idx * bin_display_width_);
 
     float bin_height = bin_values_[bin_idx] * bin_display_height_increment_;
+
+    // If bin will overflow the limits, cut off the extra portion
+    if (bin_height > graph_bounding_box_height_) {
+      bin_height = graph_bounding_box_height_;
+    }
+
     float bin_height_y_coord = lower_right_y_coordinate_ - bin_height;
 
     vec2 bin_top_left_point = vec2(distance_from_origin, bin_height_y_coord);
