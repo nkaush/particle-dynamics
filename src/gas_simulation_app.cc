@@ -2,19 +2,28 @@
 
 namespace idealgas {
 
-IdealGasApp::IdealGasApp() {
-  ci::app::setWindowSize(kWindowSize, kWindowSize);
+using cinder::app::KeyEvent;
+
+IdealGasApp::IdealGasApp() : engine_(SimulationEngine(false)) {
+  ci::app::setWindowSize(kWindowWidth, kWindowHeight);
 }
 
 void IdealGasApp::draw() {
   ci::Color background_color("black");
   ci::gl::clear(background_color);
 
-  container_.Display();
+  engine_.Render();
 }
 
 void IdealGasApp::update() {
-  container_.AdvanceOneFrame();
+  engine_.AdvanceToNextFrame();
+}
+
+void IdealGasApp::keyDown(KeyEvent event) {
+  if (event.getChar() == kSaveToJsonKey) {
+    engine_.SaveSimulation();
+    console() << "Simulation Saved!" << std::endl;
+  }
 }
 
 }  // namespace idealgas

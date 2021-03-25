@@ -25,6 +25,19 @@ endif()
 # FetchContent added in CMake 3.11, downloads during the configure step
 include(FetchContent)
 
+FetchContent_Declare(json
+        GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
+        GIT_TAG v3.9.1)
+
+FetchContent_GetProperties(json)
+if(NOT json_POPULATED)
+    FetchContent_Populate(json)
+    add_library(json_lib INTERFACE)
+    add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
+target_link_libraries(json_lib INTERFACE nlohmann_json::nlohmann_json)
+
 # FetchContent_MakeAvailable was not added until CMake 3.14
 if(${CMAKE_VERSION} VERSION_LESS 3.14)
     include(cmake/add_FetchContent_MakeAvailable.cmake)
@@ -50,15 +63,28 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 list(APPEND SOURCE_FILES    src/gas_container.cc
-                            src/gas_simulation_app.cc)
+                            src/gas_simulation_app.cc
+                            src/gas_particle.cc
+                            src/simulation_engine.cc
+                            src/histogram.cc
+                            src/json_manager.cc
+                            src/data/saved_simulation.json
+                            src/data/random_simulation_generator.json)
 
-list(APPEND TEST_FILES tests/rename_this_test_file.cc)
+list(APPEND TEST_FILES tests/test_gas_particle.cc
+        tests/test_gas_container_different_mass_particle_collisions.cc
+        tests/test_gas_container_same_mass_particle_collisions.cc
+                       tests/test_gas_container_particle_wall_collisions.cc
+                       tests/test_json_manager.cc
+                       tests/test_histogram.cc
+                       tests/test_helper.cc)
 
 ci_make_app(
         APP_NAME        gas-simulation
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
         INCLUDES        include
+        LIBRARIES       json_lib
 )
 
 ci_make_app(
@@ -67,6 +93,7 @@ ci_make_app(
         SOURCES         tests/test_main.cc ${SOURCE_FILES} ${TEST_FILES}
         INCLUDES        include
         LIBRARIES       catch2
+        LIBRARIES       json_lib
 )
 
 if(MSVC)
