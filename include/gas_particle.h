@@ -75,7 +75,7 @@ class GasParticle {
 
   void SetVelocity(const glm::vec2& new_velocity);
 
-  const glm::vec2& GetVelocity() const;
+  const glm::vec2& GetVelocity() const; 
 
   const glm::vec2& GetPosition() const;
 
