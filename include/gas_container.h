@@ -1,4 +1,5 @@
-#pragma once
+#ifndef IDEAL_GAS_GAS_CONTAINER_H
+#define IDEAL_GAS_GAS_CONTAINER_H
 
 #include "cinder/gl/gl.h"
 #include "gas_particle.h"
@@ -31,7 +32,7 @@ class GasContainer {
    * @param type_counts - a size_t indicating the number of unique particle
    *                      types to track number of histograms
    */
-  GasContainer(const std::vector<GasParticle>& particles);
+  explicit GasContainer(const std::vector<GasParticle>& particles);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -136,3 +137,5 @@ class GasContainer {
 };
 
 }  // namespace idealgas
+
+#endif  // IDEAL_GAS_GAS_CONTAINER_H

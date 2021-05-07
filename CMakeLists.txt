@@ -68,8 +68,7 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/simulation_engine.cc
                             src/histogram.cc
                             src/json_manager.cc
-                            src/data/saved_simulation.json
-                            src/data/random_simulation_generator.json)
+                            src/json_helper.cc)
 
 list(APPEND TEST_FILES tests/test_gas_particle.cc
         tests/test_gas_container_different_mass_particle_collisions.cc

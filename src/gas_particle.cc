@@ -21,7 +21,8 @@ GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
                          float green, float blue, const string& name) :
       position_(initial_pos), velocity_(initial_velo), radius_(radius_to_set),
       mass_(mass_to_set), red_intensity_(red), green_intensity_(green),
-      blue_intensity_(blue), particle_type_name_(name) {}
+      blue_intensity_(blue), particle_type_name_(name) {
+}
 
 void GasParticle::UpdatePosition() {
   position_ += velocity_;
@@ -36,11 +37,11 @@ void GasParticle::SetVelocity(const glm::vec2& new_velocity) {
   velocity_ = new_velocity;
 }
 
-glm::vec2 GasParticle::GetVelocity() const {
+const glm::vec2& GasParticle::GetVelocity() const {
   return velocity_;
 }
 
-glm::vec2 GasParticle::GetPosition() const {
+const glm::vec2& GasParticle::GetPosition() const {
   return position_;
 }
 

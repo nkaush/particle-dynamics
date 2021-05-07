@@ -54,9 +54,6 @@ class SimulationEngine {
   void Render();
 
  private:
-  // The full directory path to this project
-  static const std::string kBaseFilePath;
-
   static constexpr float kHistogramDisplayPadding = 50;
   static constexpr float kDefaultHistogramXCoordinate = 50;
 

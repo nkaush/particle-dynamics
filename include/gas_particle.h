@@ -1,7 +1,10 @@
-#pragma once
+#ifndef IDEAL_GAS_GAS_PARTICLE_H
+#define IDEAL_GAS_GAS_PARTICLE_H
 
+#include "json_helper.h"
+
+#include <nlohmann/json.hpp>
 #include "cinder/gl/gl.h"
-#include <vector>
 
 namespace idealgas {
 
@@ -19,11 +22,21 @@ struct ParticleSpecs {
   std::string name;
 };
 
+//NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ParticleSpecs, radius, mass, red_intensity,
+//                                   green_intensity, blue_intensity, name)
+
 /**
  * This class is used as an abstraction to represent a single gas particle.
  */
 class GasParticle {
  public:
+
+//  /**
+//   *
+//   */
+//  NLOHMANN_DEFINE_TYPE_INTRUSIVE(
+//      GasParticle, position_, velocity_, particle_type_name_);
+
   /**
    * Creates a GasParticle. This constructor takes in the ParticleSpecs struct
    * to define basic particle details.
@@ -62,9 +75,9 @@ class GasParticle {
 
   void SetVelocity(const glm::vec2& new_velocity);
 
-  glm::vec2 GetVelocity() const;
+  const glm::vec2& GetVelocity() const;
 
-  glm::vec2 GetPosition() const;
+  const glm::vec2& GetPosition() const;
 
   float GetRadius() const;
 
@@ -98,3 +111,5 @@ class GasParticle {
 };
 
 }  // namespace idealgas
+
+#endif  // IDEAL_GAS_GAS_PARTICLE_H

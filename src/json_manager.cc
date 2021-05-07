@@ -190,7 +190,7 @@ void JsonManager::WriteContainerToJson(const GasContainer& container,
 
   // write the json to the saved file
   std::ofstream output_file(save_file_path);
-  output_file << std::setw(4) << output << std::endl;
+  output_file << std::setw(2) << output << std::endl;
 }
 
 json JsonManager::SerializeParticle(const GasParticle& particle,

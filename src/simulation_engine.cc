@@ -7,14 +7,11 @@ using std::string;
 using std::vector;
 using std::map;
 
-const string SimulationEngine::kBaseFilePath =
-    "/Users/neilkaushikkar/Cinder/my-projects/ideal-gas-nkaush/";
+const string SimulationEngine::kJsonSavedFilePath =
+    "data/saved_simulation.json";
 
-const string SimulationEngine::kJsonSavedFilePath = kBaseFilePath
-    + "src/data/saved_simulation.json";
-
-const string SimulationEngine::kJsonRandomSimulationFilePath = kBaseFilePath
-    + "src/data/random_simulation_generator.json";
+const string SimulationEngine::kJsonRandomSimulationFilePath =
+    "data/random_simulation_generator.json";
 
 SimulationEngine::SimulationEngine(bool load_from_saved_file) :
       json_manager_(), container_(ContainerInitializer(load_from_saved_file)),
