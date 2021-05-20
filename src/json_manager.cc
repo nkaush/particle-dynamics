@@ -37,41 +37,10 @@ GasContainer JsonManager::LoadContainerFromJson(
   json json_data;
   loaded_file >> json_data;
 
-  // Access the particles definitions and particle instances sub-objects
-  json particle_types = json_data[kJsonSchemaParticleTypesKey];
-  std::vector<GasParticle> gas_particles_vector;
+  GasContainer container = json_data.get<GasContainer>();
+  container.Configure();
 
-  // Iterate through all objects in the array of particle instances
-  for (const json& particle_state : json_data[kJsonSchemaParticleStatesKey]) {
-    GasParticle gas_particle =
-        CreateSpecifiedParticle(particle_state, particle_types);
-    gas_particles_vector.push_back(gas_particle);
-  }
-
-  return GasContainer(gas_particles_vector);
-}
-
-GasParticle JsonManager::CreateSpecifiedParticle(
-    const json& particle_state, const json& particle_types) const {
-  // Convert a json array to a vec2 for position and velocity
-  json position_array = particle_state[kJsonSchemaPositionKey];
-  json velocity_array = particle_state[kJsonSchemaVelocityKey];
-  vec2 init_position = vec2(position_array[GasContainer::kXAxis],
-                            position_array[GasContainer::kYAxis]);
-  vec2 init_velocity = vec2(velocity_array[GasContainer::kXAxis],
-                            velocity_array[GasContainer::kYAxis]);
-
-  // Get the particle definition this object is referring to
-  string particle_type_name = particle_state[kJsonSchemaTypeKey];
-  json type_details = particle_types[particle_type_name];
-
-  // Create particle with particle definition and vectors created above
-  GasParticle gas_particle = GasParticle(init_position, init_velocity,
-    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaMassKey],
-    type_details[kJsonSchemaRedKey], type_details[kJsonSchemaGreenKey],
-    type_details[kJsonSchemaBlueKey], particle_type_name);
-
-  return gas_particle;
+  return container;
 }
 
 GasContainer JsonManager::GenerateRandomContainerFromJson(
@@ -131,7 +100,7 @@ GasParticle JsonManager::GenerateRandomParticle(
 }
 
 void JsonManager::ValidateRandomGenerationJson(const json& to_validate) {
-  // Check if the 2 json sub-objects containing all important info exist
+  /*// Check if the 2 json sub-objects containing all important info exist
   try {
     to_validate.at(kJsonSchemaParticleCountsKey);
     to_validate.at(kJsonSchemaParticleTypesKey);
@@ -163,7 +132,7 @@ void JsonManager::ValidateRandomGenerationJson(const json& to_validate) {
     } catch (json::out_of_range& e) {
       throw std::invalid_argument("The provided json is invalid");
     }
-  }
+  }*/
 }
 
 void JsonManager::ValidateFilePath(const string& file_path) {
@@ -207,9 +176,7 @@ json JsonManager::SerializeParticle(const GasParticle& particle,
     particle_types[type_name] = {
         {kJsonSchemaRadiusKey, particle.GetRadius()},
         {kJsonSchemaMassKey, particle.GetMass()},
-        {kJsonSchemaRedKey, particle.GetRedIntensity()},
-        {kJsonSchemaGreenKey, particle.GetGreenIntensity()},
-        {kJsonSchemaBlueKey, particle.GetBlueIntensity()}
+        {"color", particle.GetColor()}
     };
   }
 

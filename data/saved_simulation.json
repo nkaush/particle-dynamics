@@ -1,1567 +1,1576 @@
 {
-  "particle_states": [
+  "all_particles_": [
     {
-      "position": [
+      "position_": [
         -2.3478390757389238e+20,
         1.401298464324817e-45
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         2.802596928649634e-45,
         4.591634678053128e-41
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "oxygen",
-      "velocity": [
+      "particle_type_name_": "oxygen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "hydrogen",
-      "velocity": [
+      "particle_type_name_": "hydrogen",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     },
     {
-      "position": [
+      "position_": [
         2.3541814200656927e-43,
         4.591634678053128e-41
       ],
-      "type": "carbon",
-      "velocity": [
+      "particle_type_name_": "carbon",
+      "velocity_": [
         -2.347816557740787e+20,
         0.0
       ]
     }
   ],
-  "particle_types": {
+  "particle_specifications_": {
     "carbon": {
-      "blue": 0.5,
-      "green": 0.7900000214576721,
-      "mass": 20.0,
-      "radius": 7.0,
-      "red": 0.20000000298023224
-    },
-    "hydrogen": {
-      "blue": 0.009999999776482582,
-      "green": 0.8299999833106995,
-      "mass": 5.0,
-      "radius": 3.0,
-      "red": 0.949999988079071
+      "color": {
+        "red": 51,
+        "green": 201,
+        "blue": 128
+      },
+      "radius": 7,
+      "mass": 20,
+      "name": "carbon"
     },
     "oxygen": {
-      "blue": 0.18000000715255737,
-      "green": 0.1599999964237213,
-      "mass": 10.0,
-      "radius": 5.0,
-      "red": 0.7599999904632568
+      "color": {
+        "red": 194,
+        "green": 41,
+        "blue": 46
+      },
+      "radius": 5,
+      "mass": 10,
+      "name": "oxygen"
+    },
+    "hydrogen": {
+      "color": {
+        "red": 242,
+        "green": 212,
+        "blue": 3
+      },
+      "radius": 3,
+      "mass": 5,
+      "name": "hydrogen"
     }
   }
 }

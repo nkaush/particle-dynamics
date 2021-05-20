@@ -3,6 +3,8 @@
 
 #include "cinder/gl/gl.h"
 #include "gas_particle.h"
+#include <string>
+#include <map>
 
 namespace idealgas {
 
@@ -25,6 +27,11 @@ class GasContainer {
   static constexpr size_t kXAxis = 0;
   static constexpr size_t kYAxis = 1;
 
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(
+      GasContainer, all_particles_, particle_specifications_);
+
+  GasContainer() = default;
+
   /**
    * Initializes a GasContainer and populates it with the particles given in the
    * provided vector of GasParticles.
@@ -33,6 +40,8 @@ class GasContainer {
    *                      types to track number of histograms
    */
   explicit GasContainer(const std::vector<GasParticle>& particles);
+
+  void Configure();
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -62,6 +71,8 @@ class GasContainer {
  private:
   // stores the particles in the container
   std::vector<GasParticle> all_particles_;
+
+  std::map<std::string, ParticleSpecs> particle_specifications_;
 
   /**
    * Handles the logic of all particle interactions with walls and adjusts

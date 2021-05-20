@@ -15,9 +15,8 @@ const string Histogram::kYAxisLabel = "Frequency";
 
 Histogram::Histogram(const string& label, size_t num_bins, float single_bin_range,
                      float top_left_x, float top_left_y,
-                     float red, float green, float blue, float min_value) :
-      data_label_(label), red_intensity_(red), green_intensity_(green),
-      blue_intensity_(blue), bin_values_(), minimum_value_(min_value),
+                     const ci::Color8u& color, float min_value) :
+      data_label_(label), color_(color), bin_values_(), minimum_value_(min_value),
       single_bin_range_span_(single_bin_range),
       bin_display_height_increment_(kDefaultBinHeightIncrement),
       upper_left_x_coordinate_(top_left_x),
@@ -90,7 +89,7 @@ void Histogram::Draw() const {
 }
 
 void Histogram::DrawBins() const {
-  ci::gl::color(ci::Color(red_intensity_, green_intensity_, blue_intensity_));
+  ci::gl::color(color_);
   for (size_t bin_idx = 0; bin_idx < bin_values_.size(); bin_idx++) {
     // find the location on the axis to draw the bin
     float distance_from_origin =

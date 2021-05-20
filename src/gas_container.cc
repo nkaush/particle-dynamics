@@ -11,6 +11,12 @@ const char* GasContainer::kWallColor = "white";
 GasContainer::GasContainer(
     const vector<GasParticle>& particles) : all_particles_(particles) {}
 
+void GasContainer::Configure() {
+  for (GasParticle& particle : all_particles_) {
+    particle.Configure(particle_specifications_.at(particle.GetTypeName()));
+  }
+}
+
 void GasContainer::Display() const {
   ci::gl::color(ci::Color(kWallColor));
   // find the bounding rectangle points using the wall bounds
@@ -182,15 +188,7 @@ bool GasContainer::DoesParticleHaveSpecifications(
   bool has_same_characteristics = has_same_radius && has_same_label
                                   && has_same_mass;
 
-  bool has_same_red_intensity =
-      particle.GetRedIntensity() == specification.red_intensity;
-  bool has_same_blue_intensity =
-      particle.GetBlueIntensity() == specification.blue_intensity;
-  bool has_same_green_intensity =
-      particle.GetGreenIntensity() == specification.green_intensity;
-
-  bool has_same_color = has_same_red_intensity && has_same_green_intensity
-                        && has_same_blue_intensity;
+  bool has_same_color = particle.GetColor() == specification.color;
 
   return has_same_characteristics && has_same_color;
 }

@@ -25,8 +25,7 @@ SimulationEngine::SimulationEngine(bool load_from_saved_file) :
 
   for (const ParticleSpecs& specs : particle_types) {
     histograms_.emplace_back(specs.name, bin_count, bin_range,
-                             x_coordinate, y_coordinate, specs.red_intensity,
-                             specs.green_intensity, specs.blue_intensity);
+                             x_coordinate, y_coordinate, specs.color);
     y_coordinate += Histogram::kDefaultGraphHeight + kHistogramDisplayPadding;
   }
 }

@@ -95,19 +95,6 @@ class JsonManager {
                                      const nlohmann::json& type_details,
                                      const std::string& type_key) const;
 
-  /**
-   * Creates a GasParticle with the initial velocity, initial position, color,
-   * and radius, as specified in the json objects provided.
-   * @param particle_state - a json object containing information about this
-   *                         particle's position and velocity
-   * @param particle_types - a json object containing information about this
-   *                         particle's color and radius
-   * @return a GasParticle generated as specified
-   */
-  GasParticle CreateSpecifiedParticle(const nlohmann::json& particle_state,
-                                      const nlohmann::json& particle_types)
-  const;
-
   nlohmann::json SerializeParticle(const GasParticle& particle,
                                    nlohmann::json& particle_types) const;
 };
