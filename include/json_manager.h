@@ -86,17 +86,11 @@ class JsonManager {
    * @param random - a ci::Rand reference to use to generate random floats
    * @param max_velocity - the absolute value of the maximum velocity a particle
    *                       can have when starting to move
-   * @param type_details - a json object containing information about a particle
-   *                       and its color and radius
-   * @param type_key - the name associated with this particle's information
+   * @param specifications -
    * @return a randomly generated GasParticle as specified
    */
-  GasParticle GenerateRandomParticle(ci::Rand& random, float max_velocity,
-                                     const nlohmann::json& type_details,
-                                     const std::string& type_key) const;
-
-  nlohmann::json SerializeParticle(const GasParticle& particle,
-                                   nlohmann::json& particle_types) const;
+  GasParticle GenerateRandomParticle(
+      ci::Rand& random, float max_velo, const ParticleSpecs& specifications) const;
 };
 
 } // namespace idealgas

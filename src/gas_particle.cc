@@ -1,7 +1,8 @@
 //
 // Created by Neil Kaushikkar on 3/12/21.
 //
-#include <gas_particle.h>
+
+#include "gas_particle.h"
 
 namespace idealgas {
 
@@ -23,7 +24,7 @@ GasParticle::GasParticle(const vec2& initial_pos, const vec2& initial_velo,
 void GasParticle::Configure(const ParticleSpecs& specs) {
   radius_ = specs.radius;
   mass_ = specs.mass;
-  color_ = ci::Color8u(specs.color);
+  color_ = specs.color;
 }
 
 void GasParticle::UpdatePosition() {

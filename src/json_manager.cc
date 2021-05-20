@@ -1,4 +1,5 @@
 #include "json_manager.h"
+#include <map>
 
 namespace idealgas {
 
@@ -52,35 +53,31 @@ GasContainer JsonManager::GenerateRandomContainerFromJson(
   json json_data;
   loaded_file >> json_data;
 
-  ValidateRandomGenerationJson(json_data);
+//  ValidateRandomGenerationJson(json_data);
 
-  json particle_types = json_data[kJsonSchemaParticleTypesKey];
-  std::vector<GasParticle> gas_particles_vector;
+  auto particle_specifications =
+      json_data["particle_types"].get<std::map<std::string, ParticleSpecs>>();
+  auto container_specifications =
+      json_data["particle_counts"].get<std::vector<ContainerSpecifications>>();
+
+  std::vector<GasParticle> gas_particles;
   ci::Rand random = ci::Rand();
 
   // Go through each particle type requested to create and create all of them
-  for (json particle_specification : json_data[kJsonSchemaParticleCountsKey]) {
-    // Load the color and radius json for the newest particle to create
-    string particle_type_key = particle_specification[kJsonSchemaTypeKey];
-    json type_details = particle_types[particle_type_key];
-
-    size_t specified_count = particle_specification[kJsonSchemaCountKey];
-    float max_velocity = particle_specification[kJsonSchemaMaxVelocityKey];
-
-    for (size_t idx = 0; idx < specified_count; idx++) {
-      GasParticle particle = GenerateRandomParticle(random, max_velocity,
-                                                    type_details,
-                                                    particle_type_key);
-      gas_particles_vector.push_back(particle);
+  for (const ContainerSpecifications& specs : container_specifications) {
+    for (size_t idx = 0; idx < specs.count; idx++) {
+      GasParticle particle = GenerateRandomParticle(
+          random, specs.max_velocity,
+          particle_specifications.at(specs.particle_name));
+      gas_particles.push_back(particle);
     }
   }
 
-  return GasContainer(gas_particles_vector);
+  return GasContainer(gas_particles, particle_specifications);
 }
 
 GasParticle JsonManager::GenerateRandomParticle(
-    ci::Rand& random, float max_velo, const json& type_details,
-    const string& type_key) const {
+    ci::Rand& random, float max_velo, const ParticleSpecs& specifications) const {
   // velocity is a vec2 of values between -max_velocity and max_velocity
   vec2 velocity = vec2(random.posNegFloat(0, max_velo),
                        random.posNegFloat(0, max_velo));
@@ -92,11 +89,7 @@ GasParticle JsonManager::GenerateRandomParticle(
                                       GasContainer::kContainerLowerBound);
   vec2 position = vec2(x_position, y_position);
 
-  GasParticle gas_particle = GasParticle(position, velocity,
-    type_details[kJsonSchemaRadiusKey], type_details[kJsonSchemaMassKey],
-    type_details[kJsonSchemaRedKey], type_details[kJsonSchemaGreenKey],
-    type_details[kJsonSchemaBlueKey], type_key);
-  return gas_particle;
+  return GasParticle(position, velocity, specifications);
 }
 
 void JsonManager::ValidateRandomGenerationJson(const json& to_validate) {
@@ -145,52 +138,11 @@ void JsonManager::ValidateFilePath(const string& file_path) {
 
 void JsonManager::WriteContainerToJson(const GasContainer& container,
                                        const string& save_file_path) const {
-  json particle_types;
-  json particle_array;
-
-  for (const GasParticle& particle : container.GetAllParticles()) {
-    json serialized_particle = SerializeParticle(particle, particle_types);
-    particle_array.push_back(serialized_particle);
-  }
-
-  json output;
-  output[kJsonSchemaParticleStatesKey] = particle_array;
-  output[kJsonSchemaParticleTypesKey] = particle_types;
+  json serialized_container = container;
 
   // write the json to the saved file
   std::ofstream output_file(save_file_path);
-  output_file << std::setw(2) << output << std::endl;
-}
-
-json JsonManager::SerializeParticle(const GasParticle& particle,
-                                    json& particle_types) const {
-  json serialized_particle;
-  string type_name = particle.GetTypeName();
-  serialized_particle[kJsonSchemaTypeKey] = type_name;
-
-  // Add the particle state definition to the json if it is not defined yet
-  try {
-    particle_types.at(type_name);
-    // no way to actually check if a key exists so use try/catch
-  } catch (json::exception& e) {
-    particle_types[type_name] = {
-        {kJsonSchemaRadiusKey, particle.GetRadius()},
-        {kJsonSchemaMassKey, particle.GetMass()},
-        {"color", particle.GetColor()}
-    };
-  }
-
-  json position_array;  // save the position array
-  position_array.push_back(particle.GetPosition()[GasContainer::kXAxis]);
-  position_array.push_back(particle.GetPosition()[GasContainer::kYAxis]);
-  serialized_particle[kJsonSchemaPositionKey] = position_array;
-
-  json velocity_array;  // save the velocity array
-  velocity_array.push_back(particle.GetVelocity()[GasContainer::kXAxis]);
-  velocity_array.push_back(particle.GetVelocity()[GasContainer::kYAxis]);
-  serialized_particle[kJsonSchemaVelocityKey] = velocity_array;
-
-  return serialized_particle;
+  output_file << std::setw(2) << serialized_container << std::endl;
 }
 
 } // namespace idealgas

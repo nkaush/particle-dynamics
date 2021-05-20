@@ -7,7 +7,8 @@
         "blue": 128
       },
       "radius": 7,
-      "mass": 20
+      "mass": 20,
+      "name": "carbon"
     },
     "oxygen": {
       "color": {
@@ -16,7 +17,8 @@
         "blue": 46
       },
       "radius": 5,
-      "mass": 10
+      "mass": 10,
+      "name": "oxygen"
     },
     "hydrogen": {
       "color": {
@@ -25,22 +27,23 @@
         "blue": 3
       },
       "radius": 3,
-      "mass": 5
+      "mass": 5,
+      "name": "hydrogen"
     }
   },
   "particle_counts": [
     {
-      "type": "oxygen",
+      "particle_name": "oxygen",
       "count": 50,
       "max_velocity": 2
     },
     {
-      "type": "hydrogen",
+      "particle_name": "hydrogen",
       "count": 40,
       "max_velocity": 2
     },
     {
-      "type": "carbon",
+      "particle_name": "carbon",
       "count": 50,
       "max_velocity": 2
     }
