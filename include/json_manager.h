@@ -44,13 +44,6 @@ class JsonManager {
   static void ValidateFilePath(const std::string& file_path);
 
   /**
-   * Ensures that the provided json has a valid schema.
-   * @param to_validate - the json object to validate
-   * @throws std::invalid_argument when the json provided is invalid
-   */
-  static void ValidateRandomGenerationJson(const nlohmann::json& to_validate);
-
-  /**
    * Saves the current state of the simulation in a json file.
    */
   void WriteContainerToJson(const GasContainer& container,
@@ -58,25 +51,8 @@ class JsonManager {
 
  private:
   // These keys access the subsections of the json: motion and visuals
-  static const std::string kJsonSchemaParticleStatesKey;
   static const std::string kJsonSchemaParticleTypesKey;
   static const std::string kJsonSchemaParticleCountsKey;
-
-  // These keys access info about a particle's motion
-  static const std::string kJsonSchemaVelocityKey;
-  static const std::string kJsonSchemaPositionKey;
-
-  // These keys access info about the visuals of the particles
-  static const std::string kJsonSchemaTypeKey;
-  static const std::string kJsonSchemaRedKey;
-  static const std::string kJsonSchemaGreenKey;
-  static const std::string kJsonSchemaBlueKey;
-  static const std::string kJsonSchemaRadiusKey;
-  static const std::string kJsonSchemaMassKey;
-
-  // These fields are used as constraints for generating GasContainers randomly
-  static const std::string kJsonSchemaCountKey;
-  static const std::string kJsonSchemaMaxVelocityKey;
 
   /**
    * Generates a particle with random velocity, as specified by the max velocity

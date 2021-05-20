@@ -7,25 +7,8 @@ using std::string;
 using nlohmann::json;
 using glm::vec2;
 
-const string JsonManager::kJsonSchemaParticleStatesKey = "particle_states";
 const string JsonManager::kJsonSchemaParticleTypesKey = "particle_types";
 const string JsonManager::kJsonSchemaParticleCountsKey = "particle_counts";
-
-// These keys access info about a particle's motion
-const string JsonManager::kJsonSchemaVelocityKey = "velocity";
-const string JsonManager::kJsonSchemaPositionKey = "position";
-
-// These keys access info about the visuals of the particles
-const string JsonManager::kJsonSchemaTypeKey = "type";
-const string JsonManager::kJsonSchemaRedKey = "red";
-const string JsonManager::kJsonSchemaGreenKey = "green";
-const string JsonManager::kJsonSchemaBlueKey = "blue";
-const string JsonManager::kJsonSchemaRadiusKey = "radius";
-const string JsonManager::kJsonSchemaMassKey = "mass";
-
-// These fields are used as constraints for generating GasContainers randomly
-const string JsonManager::kJsonSchemaCountKey = "count";
-const string JsonManager::kJsonSchemaMaxVelocityKey = "max_velocity";
 
 JsonManager::JsonManager() = default;
 
@@ -53,12 +36,10 @@ GasContainer JsonManager::GenerateRandomContainerFromJson(
   json json_data;
   loaded_file >> json_data;
 
-//  ValidateRandomGenerationJson(json_data);
-
-  auto particle_specifications =
-      json_data["particle_types"].get<std::map<std::string, ParticleSpecs>>();
-  auto container_specifications =
-      json_data["particle_counts"].get<std::vector<ContainerSpecifications>>();
+  auto particle_specifications = json_data[kJsonSchemaParticleTypesKey]
+                                     .get<std::map<std::string, ParticleSpecs>>();
+  auto container_specifications = json_data[kJsonSchemaParticleCountsKey]
+                                      .get<std::vector<ContainerSpecifications>>();
 
   std::vector<GasParticle> gas_particles;
   ci::Rand random = ci::Rand();
@@ -90,42 +71,6 @@ GasParticle JsonManager::GenerateRandomParticle(
   vec2 position = vec2(x_position, y_position);
 
   return GasParticle(position, velocity, specifications);
-}
-
-void JsonManager::ValidateRandomGenerationJson(const json& to_validate) {
-  /*// Check if the 2 json sub-objects containing all important info exist
-  try {
-    to_validate.at(kJsonSchemaParticleCountsKey);
-    to_validate.at(kJsonSchemaParticleTypesKey);
-  } catch (json::out_of_range& e) {
-    throw std::invalid_argument("The provided json is invalid");
-  }
-
-  // Check the particle counts schema
-  for (const json& particle_count : to_validate[kJsonSchemaParticleCountsKey]) {
-    try {
-      // All we need to do is check if the keys exist, otherwise throw error
-      particle_count.at(kJsonSchemaCountKey);
-      particle_count.at(kJsonSchemaMaxVelocityKey);
-      string type_name = particle_count.at(kJsonSchemaTypeKey);
-      to_validate.at(kJsonSchemaParticleTypesKey).at(type_name);
-    } catch (json::out_of_range& e) {
-      throw std::invalid_argument("The provided json is invalid");
-    }
-  }
-
-  // Check the particle definitions schema
-  for (const json& particle_def : to_validate[kJsonSchemaParticleTypesKey]) {
-    try {
-      particle_def.at(kJsonSchemaRedKey);
-      particle_def.at(kJsonSchemaRadiusKey);
-      particle_def.at(kJsonSchemaMassKey);
-      particle_def.at(kJsonSchemaGreenKey);
-      particle_def.at(kJsonSchemaBlueKey);
-    } catch (json::out_of_range& e) {
-      throw std::invalid_argument("The provided json is invalid");
-    }
-  }*/
 }
 
 void JsonManager::ValidateFilePath(const string& file_path) {
