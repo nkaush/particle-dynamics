@@ -1,40 +1,49 @@
 {
   "particle_types": {
     "carbon": {
-      "red": 0.2,
-      "green": 0.79,
-      "blue": 0.5,
+      "color": {
+        "red": 51,
+        "green": 201,
+        "blue": 128
+      },
       "radius": 7,
-      "mass": 20
+      "mass": 20,
+      "name": "carbon"
     },
     "oxygen": {
-      "red": 0.76,
-      "green": 0.16,
-      "blue": 0.18,
+      "color": {
+        "red": 194,
+        "green": 41,
+        "blue": 46
+      },
       "radius": 5,
-      "mass": 10
+      "mass": 10,
+      "name": "oxygen"
     },
     "hydrogen": {
-      "red": 0.95,
-      "green": 0.83,
-      "blue": 0.01,
+      "color": {
+        "red": 242,
+        "green": 212,
+        "blue": 3
+      },
       "radius": 3,
-      "mass": 5
+      "mass": 5,
+      "name": "hydrogen"
     }
   },
   "particle_counts": [
     {
-      "type": "oxygen",
+      "particle_name": "oxygen",
       "count": 50,
       "max_velocity": 2
     },
     {
-      "type": "hydrogen",
+      "particle_name": "hydrogen",
       "count": 40,
       "max_velocity": 2
     },
     {
-      "type": "carbon",
+      "particle_name": "carbon",
       "count": 50,
       "max_velocity": 2
     }

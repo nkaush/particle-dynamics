@@ -3,8 +3,19 @@
 
 #include "cinder/gl/gl.h"
 #include "gas_particle.h"
+#include <string>
+#include <map>
 
 namespace idealgas {
+
+struct ContainerSpecifications {
+  std::string particle_name;
+  size_t count;
+  float max_velocity;
+};
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    ContainerSpecifications, particle_name, count, max_velocity);
 
 /**
  * The container in which all of the gas particles are contained. This class
@@ -25,14 +36,21 @@ class GasContainer {
   static constexpr size_t kXAxis = 0;
   static constexpr size_t kYAxis = 1;
 
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(
+      GasContainer, all_particles_, particle_specifications_);
+
+  GasContainer();
+
   /**
    * Initializes a GasContainer and populates it with the particles given in the
    * provided vector of GasParticles.
    * @param particles - a vector of GasParticle to add to the container
-   * @param type_counts - a size_t indicating the number of unique particle
-   *                      types to track number of histograms
+   * @param specifications
    */
-  explicit GasContainer(const std::vector<GasParticle>& particles);
+  GasContainer(const std::vector<GasParticle>& particles,
+               const std::map<std::string, ParticleSpecs>& specifications);
+
+  void Configure();
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -62,6 +80,11 @@ class GasContainer {
  private:
   // stores the particles in the container
   std::vector<GasParticle> all_particles_;
+
+  std::map<std::string, ParticleSpecs> particle_specifications_;
+
+  ci::Color wall_color_;
+  ci::Rectf wall_bound_;
 
   /**
    * Handles the logic of all particle interactions with walls and adjusts

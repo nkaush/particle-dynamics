@@ -2,21 +2,37 @@
 
 namespace idealgas {
 
-using glm::vec2;
 using std::vector;
+using std::string;
+using std::map;
+
+using glm::vec2;
 
 // Define the non-literal constants in this class
 const char* GasContainer::kWallColor = "white";
 
-GasContainer::GasContainer(
-    const vector<GasParticle>& particles) : all_particles_(particles) {}
+GasContainer::GasContainer()
+    : wall_color_(kWallColor),
+      wall_bound_(vec2(kContainerLeftBound, kContainerUpperBound),
+                  vec2(kContainerRightBound, kContainerLowerBound)) {}
+
+GasContainer::GasContainer(const vector<GasParticle>& particles,
+                           const map<string, ParticleSpecs>& specifications)
+    : all_particles_(particles),
+      particle_specifications_(specifications),
+      wall_color_(kWallColor),
+      wall_bound_(vec2(kContainerLeftBound, kContainerUpperBound),
+                  vec2(kContainerRightBound, kContainerLowerBound)) {}
+
+void GasContainer::Configure() {
+  for (GasParticle& particle : all_particles_) {
+    particle.Configure(particle_specifications_.at(particle.GetTypeName()));
+  }
+}
 
 void GasContainer::Display() const {
-  ci::gl::color(ci::Color(kWallColor));
-  // find the bounding rectangle points using the wall bounds
-  vec2 top_left_point = vec2(kContainerLeftBound, kContainerUpperBound);
-  vec2 bottom_right_point = vec2(kContainerRightBound, kContainerLowerBound);
-  ci::gl::drawStrokedRect(ci::Rectf(top_left_point, bottom_right_point));
+  ci::gl::color(wall_color_);
+  ci::gl::drawStrokedRect(wall_bound_);
 
   for (const GasParticle& particle : all_particles_) {
     particle.DrawParticle();
@@ -124,19 +140,21 @@ bool GasContainer::AreParticlesColliding(const GasParticle& particle_one,
   vec2 position_difference = particle_one.GetPosition()
                               - particle_two.GetPosition();
 
+  // Check if particles' relative velocities are opposite relative displacement
+  if (glm::dot(velocity_difference, position_difference) >= 0) {
+    return false;
+  }
+
   float center_distance =
       glm::distance(particle_one.GetPosition(), particle_two.GetPosition());
   float radius_sum = particle_two.GetRadius() + particle_one.GetRadius();
 
-  // Check if particles' relative velocities are opposite relative displacement
-  bool are_moving_towards_each_other =
-      glm::dot(velocity_difference, position_difference) < 0;
-
-  return are_moving_towards_each_other && center_distance <= radius_sum;
+  return center_distance <= radius_sum;
 }
 
 vec2 GasContainer::CalculateParticleVelocityAfterCollision(
     const GasParticle& particle_one, const GasParticle& particle_two) {
+
   vec2 velo_diff = particle_one.GetVelocity() - particle_two.GetVelocity();
   vec2 pos_diff = particle_one.GetPosition() - particle_two.GetPosition();
   float mass_sum = particle_one.GetMass() + particle_two.GetMass();
@@ -182,15 +200,7 @@ bool GasContainer::DoesParticleHaveSpecifications(
   bool has_same_characteristics = has_same_radius && has_same_label
                                   && has_same_mass;
 
-  bool has_same_red_intensity =
-      particle.GetRedIntensity() == specification.red_intensity;
-  bool has_same_blue_intensity =
-      particle.GetBlueIntensity() == specification.blue_intensity;
-  bool has_same_green_intensity =
-      particle.GetGreenIntensity() == specification.green_intensity;
-
-  bool has_same_color = has_same_red_intensity && has_same_green_intensity
-                        && has_same_blue_intensity;
+  bool has_same_color = particle.GetColor() == specification.color;
 
   return has_same_characteristics && has_same_color;
 }

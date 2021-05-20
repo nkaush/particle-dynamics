@@ -16,14 +16,11 @@ namespace idealgas {
 struct ParticleSpecs {
   float radius;
   float mass;
-  float red_intensity;
-  float green_intensity;
-  float blue_intensity;
+  ci::Color8u color;
   std::string name;
 };
 
-//NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ParticleSpecs, radius, mass, red_intensity,
-//                                   green_intensity, blue_intensity, name)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ParticleSpecs, radius, mass, color, name)
 
 /**
  * This class is used as an abstraction to represent a single gas particle.
@@ -31,11 +28,13 @@ struct ParticleSpecs {
 class GasParticle {
  public:
 
-//  /**
-//   *
-//   */
-//  NLOHMANN_DEFINE_TYPE_INTRUSIVE(
-//      GasParticle, position_, velocity_, particle_type_name_);
+  /**
+   *
+   */
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(
+      GasParticle, position_, velocity_, particle_type_name_);
+
+  GasParticle() = default;
 
   /**
    * Creates a GasParticle. This constructor takes in the ParticleSpecs struct
@@ -61,6 +60,8 @@ class GasParticle {
               float radius, float mass, float red, float green, float blue,
               const std::string& name);
 
+  void Configure(const ParticleSpecs& specs);
+
   /**
    * Draws this particle based on the particle's current position in the color
    * that is defined by the floats defining red, green, and blue intensity.
@@ -75,7 +76,7 @@ class GasParticle {
 
   void SetVelocity(const glm::vec2& new_velocity);
 
-  const glm::vec2& GetVelocity() const; 
+  const glm::vec2& GetVelocity() const;
 
   const glm::vec2& GetPosition() const;
 
@@ -83,11 +84,7 @@ class GasParticle {
 
   float GetMass() const;
 
-  float GetRedIntensity() const;
-
-  float GetGreenIntensity() const;
-
-  float GetBlueIntensity() const;
+  const ci::Color8u& GetColor() const;
 
   std::string GetTypeName() const;
 
@@ -101,10 +98,7 @@ class GasParticle {
 
   float radius_;
   float mass_;
-  // Colors to display between 0 and 1 (1 translates to 255 in decimal RGB)
-  float red_intensity_;
-  float green_intensity_;
-  float blue_intensity_;
+  ci::Color8u color_;
 
   // The name assigned to this particle when deserializing it from json
   std::string particle_type_name_;

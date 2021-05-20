@@ -5,6 +5,9 @@
 #ifndef IDEAL_GAS_HISTOGRAM_H
 #define IDEAL_GAS_HISTOGRAM_H
 
+#include <cinder/Color.h>
+
+#include <cmath>
 #include <string>
 #include <vector>
 
@@ -25,8 +28,7 @@ class Histogram {
    * @param min_value - a float indicating the minimum value of histogram bins
    */
   Histogram(const std::string& label, size_t bin_count, float single_bin_range,
-            float top_left_x, float top_left_y, float red, float green,
-            float blue, float min_value=0);
+            float top_left_x, float top_left_y, const ci::Color8u& color, float min_value=0);
 
   /**
    * Draws the histogram's bins, axis ticks, and axis labels.
@@ -53,9 +55,7 @@ class Histogram {
 
  private:
   std::string data_label_;
-  float red_intensity_;
-  float green_intensity_;
-  float blue_intensity_;
+  ci::Color8u color_;
 
   // the number of values assigned to each bin
   std::vector<size_t> bin_values_;
