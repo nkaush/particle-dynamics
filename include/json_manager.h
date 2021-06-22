@@ -53,6 +53,7 @@ class JsonManager {
   // These keys access the subsections of the json: motion and visuals
   static const std::string kJsonSchemaParticleTypesKey;
   static const std::string kJsonSchemaParticleCountsKey;
+  static const std::string kJsonSchemaDisplaySettingsKey;
 
   /**
    * Generates a particle with random velocity, as specified by the max velocity
@@ -66,7 +67,9 @@ class JsonManager {
    * @return a randomly generated GasParticle as specified
    */
   GasParticle GenerateRandomParticle(
-      ci::Rand& random, float max_velo, const ParticleSpecs& specifications) const;
+      ci::Rand& random, float max_velo,
+      const ContainerDisplaySettings& display_settings,
+      const ParticleSpecs& specifications) const;
 };
 
 } // namespace idealgas

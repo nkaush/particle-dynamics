@@ -12,22 +12,16 @@ using glm::vec2;
 
 using nlohmann::json;
 
-// Define the non-literal constants in this class
-const char* GasContainer::kWallColor = "white";
-
-GasContainer::GasContainer()
-    : wall_color_(kWallColor),
-      wall_bound_(vec2(kContainerLeftBound, kContainerUpperBound),
-                  vec2(kContainerRightBound, kContainerLowerBound)) {}
+GasContainer::GasContainer() {}
 
 GasContainer::GasContainer(const vector<GasParticle>& particles,
-                           const map<string, ParticleSpecs>& specifications)
+                           const map<string, ParticleSpecs>& specifications,
+                           const ContainerDisplaySettings& display_settings)
     : all_particles_(particles),
       particle_specifications_(specifications),
-      wall_color_(kWallColor),
-      wall_bound_(vec2(kContainerLeftBound, kContainerUpperBound),
-                  vec2(kContainerRightBound, kContainerLowerBound)) {
+      display_settings_(display_settings) {
   ConfigureTypePartition();
+  ConfigureDisplaySettings();
 }
 
 void GasContainer::ConfigureTypePartition() {
@@ -53,6 +47,14 @@ void GasContainer::ConfigureTypePartition() {
   type_partition_.push_back(all_particles_.size());
 }
 
+void GasContainer::ConfigureDisplaySettings() {
+  wall_color_ = display_settings_.wall_color_;
+  wall_bound_ = ci::Rectf(vec2(display_settings_.left_bound_,
+                               display_settings_.upper_bound_),
+                          vec2(display_settings_.right_bound_,
+                               display_settings_.lower_bound_));
+}
+
 std::istream& operator>>(std::istream& input, GasContainer& container) {
   json json_data;
   input >> json_data;
@@ -65,6 +67,7 @@ std::istream& operator>>(std::istream& input, GasContainer& container) {
   }
 
   container.ConfigureTypePartition();
+  container.ConfigureDisplaySettings();
 
   return input;
 }
@@ -106,11 +109,10 @@ void GasContainer::AdvanceOneFrame() {
 void GasContainer::HandleParticleWallInteractions() {
   for (GasParticle& particle : all_particles_) {
     bool is_colliding_at_vertical_walls = IsParticleCollidingWithAnyWallsOnAxis(
-        particle, kXAxis, kContainerLeftBound, kContainerRightBound);
+        particle, kXAxis, wall_bound_.getX1(), wall_bound_.getX2());
 
-    bool is_colliding_at_horizontal_walls =
-        IsParticleCollidingWithAnyWallsOnAxis(particle, kYAxis,
-          kContainerUpperBound, kContainerLowerBound);
+    bool is_colliding_at_horizontal_walls = IsParticleCollidingWithAnyWallsOnAxis(
+        particle, kYAxis, wall_bound_.getY1(), wall_bound_.getY2());
 
     particle.SetVelocity(CalculateParticleVelocityAfterWallCollision(particle,
       is_colliding_at_vertical_walls, is_colliding_at_horizontal_walls));

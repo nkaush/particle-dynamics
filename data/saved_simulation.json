@@ -1572,5 +1572,16 @@
       "name": "oxygen",
       "radius": 5.0
     }
+  },
+  "display_settings_": {
+    "upper_bound_": 50,
+    "lower_bound_": 450,
+    "left_bound_": 300,
+    "right_bound_": 700,
+    "wall_color_": {
+      "red": 255,
+      "green": 255,
+      "blue": 255
+    }
   }
 }

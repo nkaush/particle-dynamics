@@ -3,11 +3,26 @@
 
 #include "cinder/gl/gl.h"
 #include "gas_particle.h"
+#include "json_helper.h"
+
 #include <string>
 #include <map>
 
 namespace idealgas {
 
+struct ContainerDisplaySettings {
+  float upper_bound_;
+  float lower_bound_;
+  float left_bound_;
+  float right_bound_;
+  ci::Color8u wall_color_;
+};
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    ContainerDisplaySettings, upper_bound_, lower_bound_,
+    left_bound_, right_bound_, wall_color_);
+
+// TODO - implement
 struct ContainerSpecifications {
   std::string particle_name;
   size_t count;
@@ -23,21 +38,12 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
  */
 class GasContainer {
  public:
-  // The color to display the walls in
-  static const char* kWallColor;
-
-  // Define the bounds of the container on top, bottom, left, and right walls
-  static constexpr float kContainerUpperBound = 50;
-  static constexpr float kContainerLowerBound = 450;
-  static constexpr float kContainerLeftBound = 300;
-  static constexpr float kContainerRightBound = 700;
-
   // Used to access values corresponding to an specific axis
   static constexpr size_t kXAxis = 0;
   static constexpr size_t kYAxis = 1;
 
   NLOHMANN_DEFINE_TYPE_INTRUSIVE(
-      GasContainer, all_particles_, particle_specifications_);
+      GasContainer, all_particles_, particle_specifications_, display_settings_);
 
   GasContainer();
 
@@ -46,9 +52,11 @@ class GasContainer {
    * provided vector of GasParticles.
    * @param particles - a vector of GasParticle to add to the container
    * @param specifications
+   * @param display_settings
    */
   GasContainer(const std::vector<GasParticle>& particles,
-               const std::map<std::string, ParticleSpecs>& specifications);
+               const std::map<std::string, ParticleSpecs>& specifications,
+               const ContainerDisplaySettings& display_settings);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -88,10 +96,14 @@ class GasContainer {
 
   std::map<std::string, ParticleSpecs> particle_specifications_;
 
-  ci::Color wall_color_;
+  ContainerDisplaySettings display_settings_;
+
+  ci::Color8u wall_color_;
   ci::Rectf wall_bound_;
 
   void ConfigureTypePartition();
+
+  void ConfigureDisplaySettings();
 
   /**
    * Handles the logic of all particle interactions with walls and adjusts

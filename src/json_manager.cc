@@ -9,6 +9,7 @@ using glm::vec2;
 
 const string JsonManager::kJsonSchemaParticleTypesKey = "particle_types";
 const string JsonManager::kJsonSchemaParticleCountsKey = "particle_counts";
+const string JsonManager::kJsonSchemaDisplaySettingsKey = "display_settings_";
 
 JsonManager::JsonManager() = default;
 
@@ -53,6 +54,8 @@ GasContainer JsonManager::GenerateRandomContainerFromJson(
                                      .get<std::map<std::string, ParticleSpecs>>();
   auto container_specifications = json_data[kJsonSchemaParticleCountsKey]
                                       .get<std::vector<ContainerSpecifications>>();
+  auto display_settings = json_data[kJsonSchemaDisplaySettingsKey]
+                              .get<ContainerDisplaySettings>();
 
   std::vector<GasParticle> gas_particles;
   ci::Rand random = ci::Rand();
@@ -61,26 +64,28 @@ GasContainer JsonManager::GenerateRandomContainerFromJson(
   for (const ContainerSpecifications& specs : container_specifications) {
     for (size_t idx = 0; idx < specs.count; idx++) {
       GasParticle particle = GenerateRandomParticle(
-          random, specs.max_velocity,
+          random, specs.max_velocity, display_settings,
           particle_specifications.at(specs.particle_name));
       gas_particles.push_back(particle);
     }
   }
 
-  return GasContainer(gas_particles, particle_specifications);
+  return GasContainer(gas_particles, particle_specifications, display_settings);
 }
 
 GasParticle JsonManager::GenerateRandomParticle(
-    ci::Rand& random, float max_velo, const ParticleSpecs& specifications) const {
+    ci::Rand& random, float max_velo,
+    const ContainerDisplaySettings& display_settings,
+    const ParticleSpecs& specifications) const {
   // velocity is a vec2 of values between -max_velocity and max_velocity
   vec2 velocity = vec2(random.posNegFloat(0, max_velo),
                        random.posNegFloat(0, max_velo));
 
   // Generate a random position within the bounds of the container
-  float x_position = random.nextFloat(GasContainer::kContainerLeftBound,
-                                      GasContainer::kContainerRightBound);
-  float y_position = random.nextFloat(GasContainer::kContainerUpperBound,
-                                      GasContainer::kContainerLowerBound);
+  float x_position = random.nextFloat(display_settings.left_bound_,
+                                      display_settings.right_bound_);
+  float y_position = random.nextFloat(display_settings.upper_bound_,
+                                      display_settings.lower_bound_);
   vec2 position = vec2(x_position, y_position);
 
   return GasParticle(position, velocity, specifications);
