@@ -28,6 +28,8 @@ SimulationEngine::SimulationEngine(bool load_from_saved_file) :
                              x_coordinate, y_coordinate, specs.color);
     y_coordinate += Histogram::kDefaultGraphHeight + kHistogramDisplayPadding;
   }
+
+  test = false;
 }
 
 GasContainer SimulationEngine::ContainerInitializer(
@@ -49,17 +51,43 @@ void SimulationEngine::AdvanceToNextFrame() {
   UpdateHistograms();
 }
 
-void SimulationEngine::UpdateHistograms() {
+/*void SimulationEngine::UpdateHistograms() {
   map<string, vector<float>> particle_speeds;
 
   for (const GasParticle& particle : container_.GetAllParticles()) {
     float speed = glm::length(particle.GetVelocity());
     particle_speeds[particle.GetTypeName()].push_back(speed);
+
+    if (!test) {
+      std::cout << particle.GetTypeName() << std::endl;
+    }
   }
+
+  test = true;
 
   // Can't declare hist a const reference since we need to update internal state
   for (Histogram& hist : histograms_) {
     hist.UpdateBinDistribution(particle_speeds.at(hist.GetDataLabel()));
+  }
+}*/
+
+void SimulationEngine::UpdateHistograms() {
+  size_t begin_index = 0;
+
+  for (size_t hist_idx = 0; hist_idx < histograms_.size(); hist_idx++) {
+    size_t partition = container_.GetTypePartition().at(hist_idx);
+
+    vector<float> group_speeds = vector<float>(partition - begin_index);
+
+    for (size_t idx = 0; idx < group_speeds.size(); idx++) {
+      group_speeds.at(idx) = glm::length(container_.GetAllParticles()
+                                             .at(begin_index + idx)
+                                             .GetVelocity());
+    }
+
+    histograms_.at(hist_idx).UpdateBinDistribution(group_speeds);
+
+    begin_index = partition;
   }
 }
 

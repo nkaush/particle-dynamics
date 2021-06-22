@@ -56,7 +56,7 @@ float GasParticle::GetMass() const {
   return mass_;
 }
 
-string GasParticle::GetTypeName() const {
+const string& GasParticle::GetTypeName() const {
     return particle_type_name_;
 }
 

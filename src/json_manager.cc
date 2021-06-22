@@ -18,13 +18,26 @@ GasContainer JsonManager::LoadContainerFromJson(
 
   // Code below adapted from https://stackoverflow.com/a/2602060
   std::ifstream loaded_file(json_file_path);
-  json json_data;
-  loaded_file >> json_data;
+  GasContainer container;
 
-  GasContainer container = json_data.get<GasContainer>();
-  container.Configure();
+  loaded_file >> container;
 
   return container;
+}
+
+void JsonManager::ValidateFilePath(const string& file_path) {
+  std::ifstream located_file(file_path);
+
+  if (!located_file.is_open()) {
+    throw std::invalid_argument("The file path is not valid");
+  }
+}
+
+void JsonManager::WriteContainerToJson(const GasContainer& container,
+                                       const string& save_file_path) const {
+  // write the json to the saved file
+  std::ofstream output_file(save_file_path);
+  output_file << container;
 }
 
 GasContainer JsonManager::GenerateRandomContainerFromJson(
@@ -71,23 +84,6 @@ GasParticle JsonManager::GenerateRandomParticle(
   vec2 position = vec2(x_position, y_position);
 
   return GasParticle(position, velocity, specifications);
-}
-
-void JsonManager::ValidateFilePath(const string& file_path) {
-  std::ifstream located_file(file_path);
-
-  if (!located_file.is_open()) {
-    throw std::invalid_argument("The file path is not valid");
-  }
-}
-
-void JsonManager::WriteContainerToJson(const GasContainer& container,
-                                       const string& save_file_path) const {
-  json serialized_container = container;
-
-  // write the json to the saved file
-  std::ofstream output_file(save_file_path);
-  output_file << std::setw(2) << serialized_container << std::endl;
 }
 
 } // namespace idealgas

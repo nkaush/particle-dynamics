@@ -86,7 +86,7 @@ class GasParticle {
 
   const ci::Color8u& GetColor() const;
 
-  std::string GetTypeName() const;
+  const std::string& GetTypeName() const;
 
   ParticleSpecs GetParticleTypeDetails() const;
 

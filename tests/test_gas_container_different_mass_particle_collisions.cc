@@ -16,8 +16,8 @@ using glm::vec2;
 using std::vector;
 
 TEST_CASE("Testing Particles With Different Mass Colliding Parallel To Axes") {
-  ParticleSpecs specs_one = {1, 1, 255, 255, 255, "test"};
-  ParticleSpecs specs_two = {1, 2, 255, 255, 255, "test"};
+  ParticleSpecs specs_one = {1, 1, ci::ColorA8u(255, 255, 255), "test"};
+  ParticleSpecs specs_two = {1, 2, ci::ColorA8u(255, 255, 255), "test"};
 
   SECTION("Touching particles colliding perfectly diagonal") {
     vector<GasParticle> particles;

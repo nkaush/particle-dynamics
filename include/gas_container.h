@@ -50,8 +50,6 @@ class GasContainer {
   GasContainer(const std::vector<GasParticle>& particles,
                const std::map<std::string, ParticleSpecs>& specifications);
 
-  void Configure();
-
   /**
    * Displays the container walls and the current positions of the particles.
    */
@@ -67,7 +65,9 @@ class GasContainer {
    * Getter for the particles in this container.
    * @return a vector of GasParticles in this GasContainer
    */
-  std::vector<GasParticle> GetAllParticles() const;
+  const std::vector<GasParticle>& GetAllParticles() const;
+
+  const std::vector<size_t>& GetTypePartition() const;
 
   /**
    * Find each of the unique particle types by comparing all of the particles in
@@ -77,14 +77,21 @@ class GasContainer {
    */
   std::vector<ParticleSpecs> FindUniqueParticleTypes() const;
 
+  friend std::istream& operator>>(std::istream& input, GasContainer& container);
+
+  friend std::ostream& operator<<(std::ostream& output, const GasContainer& container);
+
  private:
   // stores the particles in the container
   std::vector<GasParticle> all_particles_;
+  std::vector<size_t> type_partition_;
 
   std::map<std::string, ParticleSpecs> particle_specifications_;
 
   ci::Color wall_color_;
   ci::Rectf wall_bound_;
+
+  void ConfigureTypePartition();
 
   /**
    * Handles the logic of all particle interactions with walls and adjusts

@@ -61,6 +61,8 @@ class SimulationEngine {
   GasContainer container_;
   std::vector<Histogram> histograms_;
 
+  bool test;
+
   /**
    * Updates the histograms in the frame by passing the updated velocities
    * from the GasContainer to each particle's corresponding histogram.

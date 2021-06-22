@@ -1,5 +1,7 @@
 #include "gas_container.h"
 
+#include <nlohmann/json.hpp>
+
 namespace idealgas {
 
 using std::vector;
@@ -7,6 +9,8 @@ using std::string;
 using std::map;
 
 using glm::vec2;
+
+using nlohmann::json;
 
 // Define the non-literal constants in this class
 const char* GasContainer::kWallColor = "white";
@@ -22,13 +26,56 @@ GasContainer::GasContainer(const vector<GasParticle>& particles,
       particle_specifications_(specifications),
       wall_color_(kWallColor),
       wall_bound_(vec2(kContainerLeftBound, kContainerUpperBound),
-                  vec2(kContainerRightBound, kContainerLowerBound)) {}
-
-void GasContainer::Configure() {
-  for (GasParticle& particle : all_particles_) {
-    particle.Configure(particle_specifications_.at(particle.GetTypeName()));
-  }
+                  vec2(kContainerRightBound, kContainerLowerBound)) {
+  ConfigureTypePartition();
 }
+
+void GasContainer::ConfigureTypePartition() {
+  std::sort(all_particles_.begin(),
+            all_particles_.end(),
+            [] (const GasParticle& a, const GasParticle& b) {
+              return a.GetTypeName() < b.GetTypeName();
+            });
+
+  std::string current_type;
+
+  if (all_particles_.size() > 0) {
+    current_type = all_particles_.at(0).GetTypeName();
+  }
+
+  for (size_t idx = 0; idx < all_particles_.size(); idx++) {
+    if (all_particles_.at(idx).GetTypeName() != current_type) {
+      current_type = all_particles_.at(idx).GetTypeName();
+      type_partition_.push_back(idx);
+    }
+  }
+
+  type_partition_.push_back(all_particles_.size());
+}
+
+std::istream& operator>>(std::istream& input, GasContainer& container) {
+  json json_data;
+  input >> json_data;
+
+  container = json_data.get<GasContainer>();
+
+  for (GasParticle& particle : container.all_particles_) {
+    particle.Configure(
+        container.particle_specifications_.at(particle.GetTypeName()));
+  }
+
+  container.ConfigureTypePartition();
+
+  return input;
+}
+
+std::ostream& operator<<(std::ostream& output, const GasContainer& container) {
+  json serialized_container = container;
+  output << std::setw(2) << serialized_container << std::endl;
+
+  return output;
+}
+
 
 void GasContainer::Display() const {
   ci::gl::color(wall_color_);
@@ -39,8 +86,12 @@ void GasContainer::Display() const {
   }
 }
 
-vector<GasParticle> GasContainer::GetAllParticles() const {
+const vector<GasParticle>& GasContainer::GetAllParticles() const {
   return all_particles_;
+}
+
+const std::vector<size_t>& GasContainer::GetTypePartition() const {
+  return type_partition_;
 }
 
 void GasContainer::AdvanceOneFrame() {
